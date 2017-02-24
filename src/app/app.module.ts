@@ -18,6 +18,7 @@ import { HeroService } from './hero.service';
 import { InMemoryDataService }  from './in-memory-data.service';
 import { HeroSearchService }  from './hero-search.service';
 import { TestComponent } from './test/test.component';
+import { FormComponent } from './form/form.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { TestComponent } from './test/test.component';
     DashboardComponent,
     HeroesComponent,
     HeroSearchComponent,
-    TestComponent
+    TestComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,

@@ -22,7 +22,7 @@ import { Hero } from '../hero';
 export class HeroSearchComponent implements OnInit {
   heroes: Observable<Hero[]>;
 
-  private searchTerms = new Subject<string>();
+  private searchTerms = new Subject<string>();// new Observable object
 
   constructor(
     private heroSearchService: HeroSearchService,
