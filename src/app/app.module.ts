@@ -19,6 +19,7 @@ import { InMemoryDataService }  from './in-memory-data.service';
 import { HeroSearchService }  from './hero-search.service';
 import { TestComponent } from './test/test.component';
 import { FormComponent } from './form/form.component';
+import { HttpInterceptorModule } from 'ng-http-interceptor';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FormComponent } from './form/form.component';
     FormsModule,
     HttpModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    AppRoutingModule
+    AppRoutingModule,
+    HttpInterceptorModule
   ],
   providers: [HeroService, InMemoryDataService,HeroSearchService],
   bootstrap: [AppComponent]

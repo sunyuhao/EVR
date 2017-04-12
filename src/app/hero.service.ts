@@ -1,11 +1,29 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/do';
 import { Hero } from './hero';
+import { HttpInterceptorService } from 'ng-http-interceptor';
 
 @Injectable()
 export class HeroService {
- constructor(private http: Http) { }
+  requests = [];
+  res = null;
+  error = null;
+ constructor(
+    private http: Http,
+    private httpInterceptor: HttpInterceptorService
+    ) {
+      httpInterceptor.request().addInterceptor((data, method) => {
+      console.log(method, data);
+      return data;
+    });
+ 
+    httpInterceptor.response().addInterceptor((res, method) => {
+      return res.do(r => console.log(method, r));
+    });
+
+  }
  private heroesUrl = 'api/heroes';  // URL to web api API address
 
  private headers = new Headers({'Content-Type': 'application/json'});
