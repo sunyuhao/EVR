@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-
 import { Heroform }    from '../heroform';
+
 @Component({
-  moduleId: module.id,
   selector: 'app-form',
   templateUrl: './form.component.html',
   styleUrls: ['./form.component.css']
 })
+
 export class FormComponent {
 
- powers = ['Really Smart', 'Super Flexible',
-            'Super Hot', 'Weather Changer'];
+ powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
 
  model = new Heroform(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
 

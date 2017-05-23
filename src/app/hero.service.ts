@@ -3,6 +3,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/do';
 import { Hero } from './hero';
+import { Arm } from './arm';
 import { HttpInterceptorService } from 'ng-http-interceptor';
 
 @Injectable()
@@ -25,16 +26,17 @@ export class HeroService {
 
   }
  private heroesUrl = 'api/heroes';  // URL to web api API address
+ private armsUrl = 'api/arms';  // URL to web api API address
 
  private headers = new Headers({'Content-Type': 'application/json'});
 
-create(name: string): Promise<Hero> {
-  return this.http
-    .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
-    .toPromise()
-    .then(res => res.json().data)
-    .catch(this.handleError);
-}
+  create(name: string): Promise<Hero> {
+    return this.http
+      .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data)
+      .catch(this.handleError);
+  }
 
   update(hero: Hero): Promise<Hero> {
     const url = `${this.heroesUrl}/${hero.id}`;
@@ -51,13 +53,20 @@ create(name: string): Promise<Hero> {
     .toPromise()
     .then(() => null)
     .catch(this.handleError);
-}
+  }
 
   getHeroes(): Promise<Hero[]> {
-    return this.http.get(this.heroesUrl)
-               .toPromise()
-               .then(response => response.json().data as Hero[])
-               .catch(this.handleError);
+   return this.http.get(this.heroesUrl)
+    .toPromise()
+    .then(response => response.json().data as Hero[])// function(response){ return response.json().data}
+    .catch(this.handleError);//handle exceptions
+  }
+
+  getArms(): Promise<Arm[]>{
+   return this.http.get(this.armsUrl)
+    .toPromise()
+    .then(response => response.json().data as Arm[])// function(response){ return response.json().data}
+    .catch(this.handleError);//handle exceptions
   }
 
   getHero(id: number): Promise<Hero> {

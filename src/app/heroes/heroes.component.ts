@@ -4,7 +4,6 @@ import { HeroService } from '../hero.service';
 import {Router} from '@angular/router';
 
 @Component({
-  moduleId: module.id,
   selector: 'my-heroes',
   templateUrl: 'heroes.component.html',
   styleUrls: [ 'heroes.component.css' ]
@@ -32,6 +31,9 @@ export class HeroesComponent implements OnInit {
   gotoDetail(): void {
     this.router.navigate(['/detail', this.selectedHero.id]);
   }
+  gotoback(): void {
+    this.selectedHero = null;
+  }
 
   add(name: string): void {
   name = name.trim();
@@ -42,13 +44,13 @@ export class HeroesComponent implements OnInit {
       this.selectedHero = null;
     });
 }
-delete(hero: Hero): void {
-  this.heroService
-      .delete(hero.id)
-      .then(() => {
-        this.heroes = this.heroes.filter(h => h !== hero);
-        if (this.selectedHero === hero) { this.selectedHero = null; }
-      });
-}
+  delete(hero: Hero): void {
+    this.heroService
+        .delete(hero.id)
+        .then(() => {
+          this.heroes = this.heroes.filter(h => h !== hero);
+          if (this.selectedHero === hero) { this.selectedHero = null; }
+        });
+  }
 
 }
