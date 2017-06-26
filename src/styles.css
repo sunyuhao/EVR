@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+/* remove margin in row */
+.row {
+    margin-left:0;
+    margin-right:0;
+}
+
+/* remove padding in col- */
+  [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
+.row_header_link, .row_logo{
+  margin: 0 70px;
+}
