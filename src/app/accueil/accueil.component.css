@@ -1,7 +1,7 @@
 .row_accueil_header{
     background: #019b77;
     color:white;
-  margin: 0 70px;
+    margin: 0 70px;
 }
 
 .border{
@@ -10,4 +10,14 @@
     border-right: 3px solid #6cc29d;
     border-bottom: 0 solid #6cc29d;
     margin: 0 70px;
+}
+
+.accueil_text{
+    padding:30px 25px;
+}
+
+.accueil_text_background{
+    background: url('../../assets/seprate.png');
+    background-position: 325px 65px;
+    background-repeat: no-repeat;
 }

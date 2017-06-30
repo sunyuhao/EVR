@@ -13,3 +13,11 @@
 .row_header_link, .row_logo{
   margin: 0 70px;
 }
+
+.header_image{
+  text-align: right;
+}
+.header_text{
+  text-align: center;
+}
+
