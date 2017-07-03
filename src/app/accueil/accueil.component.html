@@ -52,8 +52,14 @@
     </div>
     <div class="col-xs-6">
       <p>
-          right block
-      </p>
+  </p>
+      <ul>
+          <li *ngFor="let evaluation of evaluations">
+          <span class="badge">{{evaluation.id}}</span>
+          <span>{{evaluation.name}}</span>
+        </li>
+      </ul>
+
     </div>
   </div>
 </div>

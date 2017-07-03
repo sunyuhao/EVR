@@ -34,6 +34,7 @@
     "@types/jasmine": "2.5.45",
     "@types/jquery": "^3.2.4",
     "@types/node": "~6.0.60",
+    "angular-in-memory-web-api": "^0.3.2",
     "codelyzer": "~3.0.1",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
