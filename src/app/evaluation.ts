@@ -1,4 +1,14 @@
 export class Evaluation {
-    id: number;
-    name: string;
+
+            "@id": string;
+            "@type": string;
+            id: number;
+            code: string;
+            name: string;
+            etape: number;
+            mode: string;
+            organizationId: string;
+            contentChanged: string;
+            createdAt: string;
+            updatedAt: string;       
 }

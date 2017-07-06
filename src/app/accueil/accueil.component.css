@@ -1,23 +1,180 @@
 .row_accueil_header{
     background: #019b77;
     color:white;
-    margin: 0 70px;
+    padding: 25px;
+    height: 200px;
+    /*margin: 0 70px;*/
 }
 
 .border{
     border-top: 12px solid #6cc29d;
-    border-left: 3px solid #6cc29d;
+    padding: 0 45px;
+    /*border-left: 3px solid #6cc29d;
     border-right: 3px solid #6cc29d;
     border-bottom: 0 solid #6cc29d;
-    margin: 0 70px;
+    margin: 0 70px;*/
 }
 
 .accueil_text{
-    padding:30px 25px;
+    padding:30px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
 }
 
 .accueil_text_background{
     background: url('../../assets/seprate.png');
-    background-position: 325px 65px;
+    background-position: 345px 55px;
     background-repeat: no-repeat;
+}
+
+.accueil_button_block{
+
+    padding: 20px 25px;
+}
+
+.accueil_button_left{
+    border-radius: 5px;
+    width: 450px;
+    height: 215px;
+    padding: 30px 70px;
+    border: 3px solid #019b77;
+}
+
+.accueil_button_right{
+    border-radius: 5px;
+    width: 450px;
+    height: 215px;
+    padding: 20px 50px;
+    border: 3px solid #019b77;
+}
+
+.accueil_title_create{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.accueil_button_create{
+    padding: 10px 30px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #019b77;
+    background-color: #ffffff;
+    color: #019b77;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.select-evaluation{
+    width: 260px;
+    height: 30px;
+}
+
+.accueil_delete{
+    padding: 10px 0;
+    height: 25px;
+    text-align: left;
+    width: 100px;
+}
+.accueil_delete a{
+    text-decoration:underline;
+    color: #6c6c6c;
+
+}
+
+.accueil_cancel{
+    padding: 10px 0;
+    height: 25px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.accueil_cancel a{
+    text-decoration:underline;
+    color: #000000;
+    font-weight: bold;
+
+}
+
+
+.modal-header{
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background-color: #019b77;
+    padding-left: 45px;
+;
+}
+.modal-header h4 {
+    color: #ffffff;
+    font-weight: bold;
+}
+.modal-body{
+     padding-left: 45px;
+     padding-right: 45px;
+}
+.popin_text_top{
+    font-size: 12px;
+}
+.popin_text_middle{
+    font-size: 12px;
+}
+
+.label_for_file_name{
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    text-align: left;
+}
+
+#file_name{
+    width:285px;
+    height: 32px;
+    margin-left: 15px;;
+    font-size: 15px;
+}
+
+.create_by_existe{
+    margin-bottom: 15px;
+}
+
+.file_name_block{
+    margin-bottom: 15px;
+}
+.checkbox_exist{
+    margin-bottom: 15px;
+}
+
+.select-exist{
+    width:245px;
+    height: 32px;
+}
+
+.continue_file_name{
+margin-bottom: 20px;
+}
+.continue_file_name_text{
+    font-size: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+     text-shadow: 0 0 0 #fff; 
+    filter: alpha(opacity=20);
+     opacity: 1;
+}
+
+
+button.close{
+    border: 2px solid #ffffff;
+    border-radius: 26px;
+    width: 25px;
+    height: 25px;
 }

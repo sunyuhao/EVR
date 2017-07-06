@@ -1,29 +1,75 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http } from '@angular/http';
+import { Headers, Http ,RequestOptions} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/do';
 
 import { Evaluation } from './evaluation';
+import { CheckLogin } from './check-login';
+import { Organisation} from './organisation'
 
 @Injectable()
 export class AccueilService {
  requests = [];
   res = null;
   error = null;
+
+
   //constructor
   constructor(private http: Http) {}
   //API URI
-  private evaluationsUrl = 'api/evaluations';
-  //header
-  private headers = new Headers({'Content-Type': 'application/json'});
+  private baseURL = 'http://dev-api.preventionbtp.fr/api/'
 
-  getEvaluations(): Promise<Evaluation[]> {
-      return this.http.get(this.evaluationsUrl)
+  //header
+
+
+    getLoginToken(login:string, pass:string) {
+      let body = new FormData();
+        body.append('_username', login);
+        body.append('_password', pass);
+        return this.http
+          .post(this.baseURL +'login_check',body)
+          .toPromise()
+          .then(res =>res.json() )
+          .catch(this.handleError);
+      }
+
+    getEvaluations(token:string,organizationId:string): Promise<Evaluation[]> {
+
+      let headers = new Headers({ 'Authorization': 'Bearer '+token});
+      headers.append('Content-Type','application/ld+json');
+      let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.baseURL+'evaluations?organizationId=458543',options)
+          .toPromise()
+          .then(response =>response.json()["hydra:member"] as Evaluation[])
+          .catch(this.handleError);//handle exceptions
+
+    }
+
+    getOrganisations(token:string):Promise<Organisation[]>{
+       let headers = new Headers({ 'Authorization': 'Bearer '+token});
+      headers.append('Content-Type','application/ld+json');
+      let options = new RequestOptions({ headers: headers });
+       return this.http.get(this.baseURL+'groups',options)
+          .toPromise()
+          .then(response =>response.json()["hydra:member"] as Organisation[])
+          .catch(this.handleError);//handle exceptions
+    }
+
+
+
+
+    checkUser(token:string): Promise<CheckLogin> {
+      let headers = new Headers({ 'Authorization': 'Bearer '+token });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.get(this.baseURL+'check_user',options)
         .toPromise()
-        .then(response => response.json().data as Evaluation[])// function(response){ return response.json().data}
+        .then(response => response.json().data as CheckLogin)
         .catch(this.handleError);//handle exceptions
+
   }
+
+   
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

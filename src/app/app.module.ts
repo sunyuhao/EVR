@@ -1,7 +1,7 @@
 // import core
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpModule } from '@angular/http';
+import { HttpModule,JsonpModule  } from '@angular/http';
 
 
 
@@ -32,7 +32,8 @@ import { InMemoryDataService }  from './in-memory-data.service';
     RoutingModule,
     BrowserModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
-    HttpModule
+    HttpModule,
+    JsonpModule
   ],
   providers: [AccueilService,InMemoryDataService],
   bootstrap: [AppComponent]
