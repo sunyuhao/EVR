@@ -18,7 +18,7 @@ export class AccueilComponent implements OnInit {
   organizationId='48453';
 
  evaluations:Evaluation[];
- organizations:Organisation[];
+ organisations:Organisation[];
  token:string;
 
 
@@ -36,7 +36,7 @@ checkLogin:CheckLogin;
   }
 
   getOrganisations(token): void {
-    this.accueilService.getOrganisations(token).then(response => this.organizations = response);
+    this.accueilService.getOrganisations(token).then(response => this.organisations = response);
   }
 
   checkUser(token):void{

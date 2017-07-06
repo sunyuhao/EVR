@@ -125,16 +125,16 @@
           <div class="col-xs-6">
               <select class="select-exist">
               <option value="">Choisir une entreprise</option>
-              <option  *ngFor="let organization of organizations"  [value]="organization.id"  >
-                {{organization.displayName}}
+              <option  *ngFor="let organisation of organisations"  [value]="organisation.organizationId"  >
+                {{organisation.displayName}}
               </option>
             </select>
           </div>
           <div class="col-xs-6">
             <select class="select-exist">
               <option value="">Choisir un dossier</option>
-              <option  *ngFor="let organization of organizations"  [value]="organization.id"  >
-                {{organization.displayName}}
+              <option  *ngFor="let organisation of organisations"  [value]="organisation.id"  >
+                {{organisation.displayName}}
               </option>
             </select>
           </div>
