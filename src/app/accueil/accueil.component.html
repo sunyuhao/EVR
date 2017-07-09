@@ -1,6 +1,9 @@
 <div class="row row_header_link">
-  <div class="col-xs-12">
-    Accueil > Evaluation des risques
+  <div class="col-xs-6 link_left">
+   <a href=""> Accueil</a> > Evaluation des risques
+  </div>
+  <div class="col-xs-6 link_right">
+    > <a href="">Retour au tableau de bord</a>
   </div>
 </div>
 
@@ -70,8 +73,8 @@
             </p>
           </div>
           <div style="text-align:center; margin-bottom:10px;">
-            <select class="select-evaluation">
-              <option value="">Choisir</option>
+            <select class="select-evaluation" [(ngModel)]="fileId" (ngModelChange)="getFileId()">
+              <option value="-1" disabled selected>Choisir</option>
               <option  *ngFor="let evaluation of evaluations"  [value]="evaluation.id"  >
                 {{evaluation.name}}
               </option>
@@ -119,9 +122,10 @@
           <label for="file_name" class="label_for_file_name">Nom du dossier* : </label><input type="text" id="file_name">
         </div>
         <div class="checkbox_exist">
-          <label><input type="checkbox" name="exisit_file" class="exisit_file">Créer un nouveau dossier à partir d’un dossier existant</label>
+         <input  id="check_create_by_exist" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+         <label for="check_create_by_exist" >Créer un nouveau dossier à partir d’un dossier existant</label>
         </div>
-        <div class="row create_by_existe"> 
+        <div class="row create_by_existe hide"> 
           <div class="col-xs-6">
               <select class="select-exist">
               <option value="">Choisir une entreprise</option>
@@ -139,11 +143,17 @@
             </select>
           </div>
         </div>
-         <div class="" style="text-align:center;">
+        <div class="create_with_new" style="text-align:center;">
             <button class="accueil_button_create">
                Créer le dossier
             </button>
         </div>
+        <div class="create_with_exist hide" style="text-align:center;">
+            <button class="accueil_button_create">
+               Créer le dossier
+            </button>
+        </div>
+
         <div class="accueil_cancel" style="text-align:center;">
            <a href="" data-dismiss="modal">Annuler</a>
         </div>
@@ -171,8 +181,8 @@
 
        <div class="continue_file_name">
 
-        <p class="continue_file_name_text">
-            Wunderman
+        <p class="continue_file_name_text" >
+            {{oneEvaluation.name}}
         </p>
 
        </div>

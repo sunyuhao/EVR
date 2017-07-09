@@ -46,6 +46,16 @@ export class AccueilService {
 
     }
 
+    getOneEvaluation(token:string,evaluationId:number): Promise<Evaluation>{
+       let headers = new Headers({ 'Authorization': 'Bearer '+token});
+      headers.append('Content-Type','application/ld+json');
+      let options = new RequestOptions({ headers: headers });
+      return this.http.get(this.baseURL+'evaluations/'+evaluationId,options)
+          .toPromise()
+          .then(response =>response.json() as Evaluation)
+          .catch(this.handleError);//handle exceptions
+    }
+
     getOrganisations(token:string):Promise<Organisation[]>{
        let headers = new Headers({ 'Authorization': 'Bearer '+token});
       headers.append('Content-Type','application/ld+json');

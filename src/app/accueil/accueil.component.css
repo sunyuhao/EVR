@@ -1,3 +1,34 @@
+
+.link_left {
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #6c6c6c;
+}
+.link_left a{
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #6c6c6c;
+    text-decoration: none;
+}
+
+
+.link_right {
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #6c6c6c;
+}
+
+.link_right a{
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    color: #6c6c6c;
+    text-decoration: none;
+}
+
 .row_accueil_header{
     background: #019b77;
     color:white;
@@ -14,6 +45,7 @@
     border-bottom: 0 solid #6cc29d;
     margin: 0 70px;*/
 }
+
 
 .accueil_text{
     padding:30px;
@@ -178,3 +210,5 @@ button.close{
     width: 25px;
     height: 25px;
 }
+
+

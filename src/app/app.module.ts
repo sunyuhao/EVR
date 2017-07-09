@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpModule,JsonpModule  } from '@angular/http';
 
+import { FormsModule } from '@angular/forms';
 
 
 // import module  
@@ -20,20 +21,23 @@ import { AccueilService } from './accueil.service';
 import { InMemoryDataService }  from './in-memory-data.service';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
     SearchMetierComponent,
     LogoComponent,
     FooterComponent,
-    AccueilComponent
+    AccueilComponent,
+    
   ],
   imports: [
     RoutingModule,
     BrowserModule,
     InMemoryWebApiModule.forRoot(InMemoryDataService),
     HttpModule,
-    JsonpModule
+    JsonpModule,
+    FormsModule
   ],
   providers: [AccueilService,InMemoryDataService],
   bootstrap: [AppComponent]
