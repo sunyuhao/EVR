@@ -1,34 +1,3 @@
-
-.link_left {
-    text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #6c6c6c;
-}
-.link_left a{
-    text-align: left;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #6c6c6c;
-    text-decoration: none;
-}
-
-
-.link_right {
-    text-align: right;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #6c6c6c;
-}
-
-.link_right a{
-    text-align: right;
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 12px;
-    color: #6c6c6c;
-    text-decoration: none;
-}
-
 .row_accueil_header{
     background: #019b77;
     color:white;
@@ -129,21 +98,7 @@
 }
 
 
-.modal-header{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    background-color: #019b77;
-    padding-left: 45px;
-;
-}
-.modal-header h4 {
-    color: #ffffff;
-    font-weight: bold;
-}
-.modal-body{
-     padding-left: 45px;
-     padding-right: 45px;
-}
+
 .popin_text_top{
     font-size: 12px;
 }

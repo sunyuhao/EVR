@@ -19,6 +19,7 @@ import { SearchMetierComponent } from './search-metier/search-metier.component';
 //import services
 import { AccueilService } from './accueil.service';
 import { InMemoryDataService }  from './in-memory-data.service';
+import { MetierComponent } from './metier/metier.component';
 
 
 
@@ -29,6 +30,7 @@ import { InMemoryDataService }  from './in-memory-data.service';
     LogoComponent,
     FooterComponent,
     AccueilComponent,
+    MetierComponent,
     
   ],
   imports: [
