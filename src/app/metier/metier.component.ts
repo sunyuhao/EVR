@@ -56,7 +56,9 @@ export class MetierComponent implements OnInit {
       $(this).closest("div").find( ".checkAll" ).prop('checked',this.checked);
       }
   });
-
+        $(window).on("load",function(){
+            $(".sub-menu").mCustomScrollbar();
+        });
   }
 
    gotoAccueil(): void {
