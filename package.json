@@ -26,6 +26,7 @@
     "core-js": "^2.4.1",
     "intl": "^1.2.5",
     "jquery": "^3.2.1",
+    "malihu-custom-scrollbar-plugin": "^3.1.5",
     "rxjs": "^5.1.0",
     "web-animations-js": "^2.2.5",
     "zone.js": "^0.8.4"
@@ -36,6 +37,8 @@
     "@angular/language-service": "^4.0.0",
     "@types/jasmine": "2.5.45",
     "@types/jquery": "^3.2.4",
+    "@types/jquery-mousewheel": "^3.1.7",
+    "@types/mcustomscrollbar": "^2.8.32",
     "@types/node": "~6.0.60",
     "angular-in-memory-web-api": "^0.3.2",
     "codelyzer": "~3.0.1",

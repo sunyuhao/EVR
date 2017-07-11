@@ -48,7 +48,13 @@ export class MetierComponent implements OnInit {
     });
 
     $(".checkAll").click(function(){
-    $('input:checkbox').not(this).prop('checked', this.checked);
+      $(this).closest("div").find( "input:checkbox" ).prop('checked', this.checked);
+  });
+
+    $(".checkSituation").click(function(){
+      if(!$(this).is(':checked')){
+      $(this).closest("div").find( ".checkAll" ).prop('checked',this.checked);
+      }
   });
 
   }

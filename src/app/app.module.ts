@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 // import module  
 import {RoutingModule} from './routing/routing.module'
 import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { ScrollbarDirective } from './scrollbar.directive';
 // import component
 import { AppComponent } from './app.component';
 import { LogoComponent } from './logo/logo.component';
@@ -23,6 +24,7 @@ import { MetierComponent } from './metier/metier.component';
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -31,6 +33,7 @@ import { MetierComponent } from './metier/metier.component';
     FooterComponent,
     AccueilComponent,
     MetierComponent,
+    ScrollbarDirective,
     
   ],
   imports: [
