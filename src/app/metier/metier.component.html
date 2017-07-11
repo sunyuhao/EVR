@@ -1,6 +1,6 @@
 <div class="row row_header_link">
   <div class="col-xs-6 link_left">
-   <a href=""> Accueil</a> > <a href="">Evaluation des risques </a>> Mon/mes métiers
+    <a href=""> Accueil</a> > <a (click)="gotoAccueil()" style="cursor:pointer">Evaluation des risques </a>> Mon/mes métiers
   </div>
   <div class="col-xs-6 link_right">
     > <a href="">Retour au tableau de bord</a>
@@ -8,21 +8,20 @@
 </div>
 <div class="row row_metier_header">
   <div class="col-xs-4 header_image">
-      <div>
-         <img src="../../assets/bord.png" alt="">
-      </div>
+    <div>
+      <img src="../../assets/bord.png" alt="">
+    </div>
   </div>
   <div class="col-xs-5 header_text">
     <div>
       <h1>
-        Évaluation des risques <br>  
-        {{title}} entreprise
+        Évaluation des risques <br> {{title}} entreprise
       </h1>
     </div>
   </div>
   <div class="col-xs-4">
-      
-  </div> 
+
+  </div>
 </div>
 
 <div class="border">
@@ -37,14 +36,14 @@
     </div>
   </div>
   <div class="row">
-      <div class="col-xs-12 metier_text">
-        <p>Choisissez le ou les métiers correspondant <br> aux activités de votre entreprise</p>
-      </div>
+    <div class="col-xs-12 metier_text">
+      <p>Choisissez le ou les métiers correspondant <br> aux activités de votre entreprise</p>
+    </div>
   </div>
   <div class="row">
     <div class="col-xs-4 metier_search_title">
       <p>Tapez et sélectionnez le nom du métier</p>
-      <a href="">Créez un nouveau métier</a>
+      <a href="" data-toggle="modal" data-target="#popin_create_metier">Créez un nouveau métier</a>
     </div>
     <div class="col-xs-4 metier_search_box">
       <input type="text" placeholder="ex:Peintre">
@@ -57,24 +56,116 @@
         Vos métiers sélectionnés <span class="arrow-down"> </span>
       </div>
       <div class="metier_selected_list">
-         <img src="../../assets/delete_metier.png" alt=""> Métier 1
+        <img src="../../assets/delete_metier.png" alt=""> Métier 1
       </div>
       <div class="metier_selected_list">
-          <img src="../../assets/delete_metier.png" alt=""> Métier 2
+        <img src="../../assets/delete_metier.png" alt=""> Métier 2
       </div>
       <div class="metier_selected_list">
-          <img src="../../assets/delete_metier.png" alt=""> Métier 2
+        <img src="../../assets/delete_metier.png" alt=""> Métier 2
       </div>
     </div>
-  </div>  
+  </div>
   <div class="row">
-    <div class="col-xs-12 " style="text-align:center;"> 
-       <button class="metier_button_inactive" disabled>
+    <div class="col-xs-12 " style="text-align:center;">
+      <button class="metier_button_inactive hide" disabled>
              Passez à l’étape 2
       </button>
-        <button class="metier_button_active" >
+      <button class="metier_button_active">
              Passez à l’étape 2
       </button>
+    </div>
+  </div>
+</div>
+
+<!--Modal Create metier-->
+<div class="modal fade" id="popin_create_metier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#ffffff;">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Créez un nouveau métier</h4>
+      </div>
+      <div class="modal-body">
+        <div class="metier_name_block">
+          <label for="metier_name" class="label_for_metier_name">Intitulé du métier* </label><input type="text" id="metier_name"
+            #metierNameInput placeholder="Donnez un nom à votre métier">
+        </div>
+
+        <div class='working-situation-block'>
+          <div>
+            <div class='working-situation-menu'>PRéPARATION ET ORGANISATION DES TRAVAUX
+              <div class='expand'></div>
+            </div>
+            <div class='sub-menu'>
+              <ul>
+                <li>
+                  <input  id="checkAll"  data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkAll"> 
+                  <label for="checkAll" > <i>Check All</i></label>
+                </li>
+                <li>
+                  <input  id="test1" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                  <label for="test1" >Church of the Nativity</label>
+                </li>
+                <li>
+                    <input  id="test2" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                    <label for="test2" >Lighthouse of Utica</label>
+               </li>
+              <li>
+                  <input  id="test3" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                  <label for="test3" >Church of the Nativity</label>
+                </li>
+                <li>
+                    <input  id="test4" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                    <label for="test4" >Lighthouse of Utica</label>
+               </li>   
+               <li>
+                  <input  id="test5" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                  <label for="test5" >Church of the Nativity</label>
+                </li>
+                <li>
+                    <input  id="test6" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                    <label for="test6" >Lighthouse of Utica</label>
+               </li>
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div class='working-situation-menu'>TRAVAUX DE CONSTRUCTION
+              <div class='expand'></div>
+            </div>
+            <div class='sub-menu'>
+              <ul>
+                <li>
+                  <input  id="checkAll2"  data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkAll"> 
+                  <label for="checkAll2" > <i>Check All</i></label>
+                </li>
+                <li>
+                  <input  id="test7" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                  <label for="test7" >Church of the Nativity</label>
+                </li>
+                <li>
+                    <input  id="test8" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                    <label for="test8" >Lighthouse of Utica</label>
+               </li>
+              <li>
+                  <input  id="test9" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
+                  <label for="test9" >Church of the Nativity</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="" style="text-align:center;">
+          <button class="metier_button_create">
+            Validez
+          </button>
+        </div>
+        <div class="metier_cancel" style="text-align:center;">
+          <a href="" data-dismiss="modal">Annuler</a>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -157,3 +157,268 @@
     text-transform: uppercase;
 }
 
+.label_for_metier_name{
+    color: #000000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    text-align: left;
+    
+}
+
+.metier_name_block{
+    margin-bottom: 25px;
+}
+
+#metier_name{
+    width:370px;
+    height: 32px;
+    margin-left: 15px;;
+    font-size: 15px;
+    padding-left: 5px;
+}
+
+.metier_cancel{
+    padding: 10px 0;
+    height: 25px;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.metier_cancel a{
+    text-decoration:underline;
+    color: #000000;
+    font-weight: bold;
+
+}
+
+.metier_button_create{
+    padding: 10px 30px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #019b77;
+    background-color: #ffffff;
+    color: #019b77;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+
+
+
+
+
+/* ---------------------DROPDOWN MENU--------------------- */
+.expand {
+  float: right;
+  display: inline;
+  transition: all .2s ease;
+  -webkit-transition: all .2s ease;
+  margin: 0 10px;
+}
+
+
+.working-situation-block {
+  /* these are the styles for the container around the menu */
+  text-align: left;
+  padding: 0px;
+  display: inline-block;
+  /*box-shadow: 0 0px 1px 0 rgba(0, 0, 0, 0.2);*/
+  border-top: 1px solid #a0a0a0;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.working-situation-menu {
+  /*this style impacts the look of the heading containers. */
+  cursor: pointer;
+  padding: 6px;
+  background: #ffffff;
+  position: relative;
+  color: #000000;
+  border-bottom: 1px solid #a0a0a0;
+  font-size: 12px;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-rendering: optimizeLegibility;
+  letter-spacing: .5px;
+  padding-left: 35px;
+}
+.working-situation-menu:before, .working-situation-menu:after {
+  content: "";
+  width: 1px;
+  height: 20px;
+  background: #019b77;
+  border-radius: 3px;
+  position: absolute;
+  right: 490px;
+  top: calc(16.7px - 12.5px);
+  transition: all .2s ease;
+}
+.working-situation-menu:after {
+  transform: rotate(90deg);
+}
+.working-situation-menu:hover {
+  background: #f2f2f2;
+}
+.open {
+    background: #019b77;
+      color: #ffffff;
+}
+
+
+
+.open:before {
+  background: #ffffff;
+  animation: turn-plus;
+  animation-duration: .3s;
+  animation-fill-mode: forwards;
+}
+
+.open:after {
+  background: #ffffff;
+  animation: turn-crossbar;
+  animation-duration: .3s;
+  animation-fill-mode: forwards;
+}
+
+.open:hover {
+  background: #019b77;
+}
+
+@keyframes turn-plus {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+@keyframes turn-crossbar {
+  0% {
+    transform: none;
+    transform: rotate(90deg);
+  }
+  50% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+
+.sub-menu {
+  max-height: 210px;
+  /*this style is for the sub-menu box*/
+  color: #000000;
+  border-bottom: 1px solid #a0a0a0;
+  font-size: 12px;
+  display: none;
+  overflow: auto;
+}
+
+.sub-menu li {
+  /*this styles individual elements in a sub-menu*/
+  padding: 5px 35px;
+  background: #ffffff;
+  border-bottom: 1px solid #ffffff;
+}
+.sub-menu li:last-child {
+  border-bottom: 0;
+}
+
+.sub-menu ul {
+  /*this just 0s out a bunch of stuff so that it plays nice with the list stylings*/
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ---------------------CHECKBOX--------------------- */
+
+/* check box */
+input[type="checkbox"] {
+    display: none!important;
+}
+
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+  position: absolute;
+  left: -9999px;
+}
+[type="checkbox"]:not(:checked) + label,
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left:25px;
+  cursor: pointer;
+}
+
+[type="checkbox"]:checked + label {
+  position: relative;
+  padding-left:25px;
+  cursor: pointer;
+  color: #019b77;
+}
+
+
+/* checkbox aspect */
+[type="checkbox"]:not(:checked) + label:before,
+[type="checkbox"]:checked + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 1.3em; height: 1.3em;
+  border: 1px solid #333;
+  background: #fff;
+  color: #000000;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+/* checked mark aspect */
+[type="checkbox"]:not(:checked) + label:after,
+[type="checkbox"]:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: .1em; left: .1em;
+  font-size: 1.3em;
+  line-height: 0.8;
+  color: #019b77;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+[type="checkbox"]:disabled:not(:checked) + label:before,
+[type="checkbox"]:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+[type="checkbox"]:disabled:checked + label:after {
+  color: #999;
+}
+[type="checkbox"]:disabled + label {
+  color: #aaa;
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+  border: 2px solid black;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 2px solid #000!important;
+}

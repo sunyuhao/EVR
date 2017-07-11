@@ -100,7 +100,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal create-->
 <div class="modal fade" id="popin_create_evaluation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -144,26 +144,24 @@
           </div>
         </div>
         <div class="create_with_new" style="text-align:center;">
-            <button class="accueil_button_create" (click)="add(evaluationInput.value); evaluationInput.value=''">
-               Créer le dossier
-            </button>
+          <button class="accueil_button_create" (click)="createEvaluation(evaluationInput.value); evaluationInput.value=''">
+              Créer le dossier
+          </button>
         </div>
         <div class="create_with_exist hide" style="text-align:center;">
-            <button class="accueil_button_create">
-               Créer le dossier
-            </button>
+          <button class="accueil_button_create">
+              Créer le dossier
+          </button>
         </div>
-
         <div class="accueil_cancel" style="text-align:center;">
            <a href="" data-dismiss="modal">Annuler</a>
         </div>
       </div>
-
     </div>
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal Delete-->
 <div class="modal fade" id="popin_delete_evaluation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -172,35 +170,30 @@
         <h4 class="modal-title" id="myModalLabel">Supprimer le dossier</h4>
       </div>
       <div class="modal-body">
-
         <div>
           <p class="popin_text_top">
             Vous allez supprimer définitivement le dossier d'évaluation des risques : 
           </p>
-       </div>
-
-       <div class="continue_file_name">
-
-        <p class="continue_file_name_text" >
-            {{oneEvaluation.name}}
-        </p>
-
-       </div>
-
-      <div>
+        </div>
+        <div class="continue_file_name">
+          <p class="continue_file_name_text" *ngIf="oneEvaluation">
+              {{oneEvaluation.name}}
+          </p>
+        </div>
+        <div>
           <p class="popin_text_top">
             Confirmez-vous la suppression ? (Les fichiers PDF des documents uniques que vous avez générés à partir de ce dossier ne seront pas supprimés.)
           </p>
-       </div>
-       <div class="" style="text-align:center;">
-            <button class="accueil_button_create">
-              Confirmer la suppression
-            </button>
+        </div>
+        <div class="" style="text-align:center;">
+          <button class="accueil_button_create">
+            Confirmer la suppression
+          </button>
         </div>
         <div class="accueil_cancel" style="text-align:center;">
-           <a href="" data-dismiss="modal">Annuler</a>
+          <a href="" data-dismiss="modal">Annuler</a>
         </div>
-        
       </div>
+    </div>
   </div>
 </div>
