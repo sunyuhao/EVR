@@ -19,13 +19,15 @@ export class AccueilComponent implements OnInit {
   title = 'test';
   login ='wunderadmin';
   pass = 'jgtRFkp35Pt';
-  organizationId='48453';
+  organizationId='458453';
   fileId="-1";
+  mode="STD"
 
   evaluations:Evaluation[];
   oneEvaluation:Evaluation;
   organisations:Organisation[];
   token:string;
+  evaluationName:string;
 
  toggleClass(e){
       if(e.target.checked){
@@ -61,8 +63,17 @@ checkLogin:CheckLogin;
     this.accueilService.getOrganisations(token).then(response => this.organisations = response);
   }
 
+  createEvaluation(token,evaluationName,mode="STD",evaluationId='458543'):void{
+    this.accueilService.createEvaluation(token,evaluationName,mode,evaluationId).then(response => this.oneEvaluation = response);
+  }
+
+
   checkUser(token):void{
      this.accueilService.checkUser(token).then(resp => this.checkLogin = resp);
+  }
+
+  add(evaluationName){
+    this.createEvaluation(this.token,evaluationName)
   }
 
   getFileId(){

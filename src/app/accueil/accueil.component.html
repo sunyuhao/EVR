@@ -119,7 +119,7 @@
           </p>
         </div>
         <div class="file_name_block">
-          <label for="file_name" class="label_for_file_name">Nom du dossier* : </label><input type="text" id="file_name">
+          <label for="file_name" class="label_for_file_name">Nom du dossier* : </label><input type="text" id="file_name" #evaluationInput>
         </div>
         <div class="checkbox_exist">
          <input  id="check_create_by_exist" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file"> 
@@ -144,7 +144,7 @@
           </div>
         </div>
         <div class="create_with_new" style="text-align:center;">
-            <button class="accueil_button_create">
+            <button class="accueil_button_create" (click)="add(evaluationInput.value); evaluationInput.value=''">
                Créer le dossier
             </button>
         </div>

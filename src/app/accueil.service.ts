@@ -10,7 +10,7 @@ import { Organisation} from './organisation'
 
 @Injectable()
 export class AccueilService {
- requests = [];
+  requests = [];
   res = null;
   error = null;
 
@@ -67,6 +67,21 @@ export class AccueilService {
     }
 
 
+    createEvaluation(token:string,name,mode,organizationId){
+      let headers = new Headers({ 'Authorization': 'Bearer '+token});
+      headers.append('Content-Type','application/ld+json');
+      let options = new RequestOptions({ headers: headers });
+      let data = {
+       	"name": name,
+        "mode": mode,
+        "organizationId": organizationId
+      }
+      let body = JSON.stringify(data);
+       return this.http.post(this.baseURL+'evaluations', body,options)
+          .toPromise()
+          .then(response =>response.json().data)
+          .catch(this.handleError);//handle exceptions
+    }
 
 
     checkUser(token:string): Promise<CheckLogin> {
