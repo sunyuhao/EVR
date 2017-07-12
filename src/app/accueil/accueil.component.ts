@@ -19,11 +19,12 @@ export class AccueilComponent implements OnInit {
   title = 'test';
   login ='wunderadmin';
   pass = 'jgtRFkp35Pt';
-  organizationId='458453';
+  organizationId=458543;
   fileId="-1";
   mode="STD"
 
   evaluations:Evaluation[];
+  allEvaluations:Evaluation[];
   oneEvaluation:Evaluation;
   organisations:Organisation[];
   token:string;
@@ -56,20 +57,28 @@ checkLogin:CheckLogin;
     this.accueilService.getLoginToken(login,pass)
     .then(response => {
       this.token = response.token; 
-      this.getEvaluations(this.token,this.organizationId);
+      this.getAllEvaluations(this.token);
       this.getOrganisations(this.token);
     });
   }
 
-  getEvaluations(token,organizationId): void {
-    this.accueilService.getEvaluations(token,organizationId)
+  getEvaluations(organizationId): void {
+    this.accueilService.getEvaluations(this.token,organizationId)
     .then(response => this.evaluations = response);
   }
+
+    getAllEvaluations(token): void {
+    this.accueilService.getAllEvaluations(token)
+    .then(response => this.allEvaluations = response);
+  }
+
 
   getOneEvaluation(token,evaluationId): void {
     this.accueilService.getOneEvaluation(token,evaluationId)
     .then(response => this.oneEvaluation = response);
   }
+
+
 
   getOrganisations(token): void {
     this.accueilService.getOrganisations(token)

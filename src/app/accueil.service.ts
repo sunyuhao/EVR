@@ -33,7 +33,7 @@ export class AccueilService {
           .then(res =>res.json() )
           .catch(this.handleError);
       }
-
+// getEvaluations for one organnization
     getEvaluations(token:string,organizationId:string): Promise<Evaluation[]> {
 
       let headers = new Headers({ 'Authorization': 'Bearer '+token});
@@ -45,7 +45,19 @@ export class AccueilService {
           .catch(this.handleError);//handle exceptions
 
     }
+// getAllEvaluations for multi organnization
+    getAllEvaluations(token:string): Promise<Evaluation[]> {
 
+      let headers = new Headers({ 'Authorization': 'Bearer '+token});
+      headers.append('Content-Type','application/ld+json');
+      let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.baseURL+'evaluations',options)
+          .toPromise()
+          .then(response =>response.json()["hydra:member"] as Evaluation[])
+          .catch(this.handleError);//handle exceptions
+
+    }
+// getOneEvaluation by ID
     getOneEvaluation(token:string,evaluationId:number): Promise<Evaluation>{
        let headers = new Headers({ 'Authorization': 'Bearer '+token});
       headers.append('Content-Type','application/ld+json');

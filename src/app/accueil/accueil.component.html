@@ -75,7 +75,7 @@
           <div style="text-align:center; margin-bottom:10px;">
             <select class="select-evaluation" [(ngModel)]="fileId" (ngModelChange)="getFileId()">
               <option value="-1" disabled selected>Choisir</option>
-              <option  *ngFor="let evaluation of evaluations"  [value]="evaluation.id"  >
+              <option  *ngFor="let evaluation of allEvaluations"  [value]="evaluation.id"  >
                 {{evaluation.name}}
               </option>
             </select>
@@ -127,24 +127,26 @@
         </div>
         <div class="row create_by_existe hide"> 
           <div class="col-xs-6">
-              <select class="select-exist">
-              <option value="">Choisir une entreprise</option>
-              <option  *ngFor="let organisation of organisations"  [value]="organisation.organizationId"  >
-                {{organisation.displayName}}
-              </option>
+              <select class="select-exist" #orgId (ngModelChange)="getEvaluations(orgId.value)">
+                <option value="">Choisir une entreprise</option>
+                <option  *ngFor="let organisation of organisations"  [value]="organisation.organizationId"  >
+                  {{organisation.displayName}}
+                </option>
             </select>
           </div>
           <div class="col-xs-6">
-            <select class="select-exist">
-              <option value="">Choisir un dossier</option>
-              <option  *ngFor="let organisation of organisations"  [value]="organisation.id"  >
-                {{organisation.displayName}}
-              </option>
-            </select>
+            <div style="text-align:center; margin-bottom:10px;">
+              <select class="select-evaluation" [(ngModel)]="fileId">
+                <option value="-1" disabled selected>Choisir</option>
+                <option  *ngFor="let evaluation of evaluations"  [value]="evaluation.id"  >
+                  {{evaluation.name}}
+                </option>
+              </select>
+            </div>
           </div>
         </div>
         <div class="create_with_new" style="text-align:center;">
-          <button class="accueil_button_create" (click)="createEvaluation(evaluationInput.value); evaluationInput.value=''">
+          <button class="accueil_button_create" data-dismiss="modal" (click)="createEvaluation(evaluationInput.value); evaluationInput.value=''">
               Créer le dossier
           </button>
         </div>

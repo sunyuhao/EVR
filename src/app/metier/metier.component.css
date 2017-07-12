@@ -220,7 +220,7 @@
 
 /* ---------------------DROPDOWN MENU--------------------- */
 .expand {
-  float: right;
+
   display: inline;
   transition: all .2s ease;
   -webkit-transition: all .2s ease;
