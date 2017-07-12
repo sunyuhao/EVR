@@ -1,5 +1,4 @@
 export class Evaluation {
-
             "@id": string;
             "@type": string;
             id: number;
