@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Evaluation } from '../class/evaluation';
-import { Organisation } from '../class/organisation';
-import { CheckLogin } from '../class/check-login'
-import { AccueilService } from '../service/accueil.service';
+import { Evaluation } from '../../class/evaluation';
+import { Organisation } from '../../class/organisation';
+import { CheckLogin } from '../../class/check-login'
+import { AccueilService } from '../../service/accueil.service';
 import { Router } from '@angular/router';
 
 
@@ -36,6 +36,7 @@ export class AccueilComponent implements OnInit {
     private accueilService: AccueilService) { }
 
   ngOnInit(): void {
+    localStorage.setItem('currentUser', JSON.stringify({ token: "token", name: "name" }));
     this.getLoginToken(this.login, this.pass);
   }
 
@@ -64,8 +65,6 @@ export class AccueilComponent implements OnInit {
       .then(response => this.allEvaluations = response);
   }
 
-
-
   getOrganisations(token): void {
     this.accueilService.getOrganisations(token)
       .then(response => this.organisations = response);
@@ -86,8 +85,8 @@ export class AccueilComponent implements OnInit {
       });
   }
 
-  createEvaluationByExist(evaluationName, organizationId): void {
-    this.accueilService.createEvaluation(this.token, evaluationName, this.mode, organizationId)
+  createEvaluationByExist(name,organizationId,evaluationId): void {
+    this.accueilService.createEvaluationByExist(this.token,name,+organizationId,+evaluationId)
       .then(response => {
         this.oneEvaluation = response;
         this.router.navigate(['/metier']);

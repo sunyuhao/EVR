@@ -10,7 +10,7 @@
 <div class="row row_accueil_header">
   <div class="col-xs-4 header_image">
     <div>
-      <img src="../../assets/bord.png" alt="">
+      <img src="assets/bord.png" alt="">
     </div>
   </div>
   <div class="col-xs-5 header_text">
@@ -119,9 +119,9 @@
             un plan d’action.
           </p>
           <p class="popin_text_middle">
-            <span class="point"><img src="../../assets/accueil_green_point.jpg" alt=""></span> Créez un seul dossier d’évaluation
+            <span class="point"><img src="assets/accueil_green_point.jpg" alt=""></span> Créez un seul dossier d’évaluation
             pour tous vos salariés exposés à des risques communs <br>
-            <span class="point"><img src="../../assets/accueil_green_point.jpg" alt=""></span> Ou créez plusieurs dossiers,
+            <span class="point"><img src="assets/accueil_green_point.jpg" alt=""></span> Ou créez plusieurs dossiers,
             chacun regroupant des salariés exposés à des risques spécifiques liés à leur activité (exemples : bureaux, dépôt,
             atelier, type de chantiers...)
           </p>
@@ -160,7 +160,7 @@
           </button>
         </div>
         <div class="create_with_exist hide" style="text-align:center;">
-          <button class="accueil_button_create" data-dismiss="modal" (click)="createEvaluationByExist(MarkerEvalId.value);">
+          <button class="accueil_button_create" data-dismiss="modal" (click)="createEvaluationByExist(MarkerEvalInput.value,orgId,MarkerEvalId.value);">
               Créer le dossier
           </button>
         </div>

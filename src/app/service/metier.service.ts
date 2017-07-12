@@ -25,50 +25,7 @@ export class MetierService {
   //header
 
 
-  getLoginToken(login: string, pass: string) {
-    let body = new FormData();
-    body.append('_username', login);
-    body.append('_password', pass);
-    return this.http
-      .post(this.baseURL + 'login_check', body)
-      .toPromise()
-      .then(res => res.json())
-      .catch(this.handleError);
-  }
-  // getEvaluations for one organnization
-  getEvaluations(token: string, organizationId: string): Promise<Evaluation[]> {
-
-    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
-    headers.append('Content-Type', 'application/ld+json');
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.baseURL + 'evaluations?organizationId=' + organizationId, options)
-      .toPromise()
-      .then(response => response.json()["hydra:member"] as Evaluation[])
-      .catch(this.handleError);//handle exceptions
-
-  }
-  // getAllEvaluations for multi organnization
-  getAllEvaluations(token: string): Promise<Evaluation[]> {
-
-    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
-    headers.append('Content-Type', 'application/ld+json');
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.baseURL + 'evaluations', options)
-      .toPromise()
-      .then(response => response.json()["hydra:member"] as Evaluation[])
-      .catch(this.handleError);//handle exceptions
-
-  }
-  // getOneEvaluation by ID
-  getOneEvaluation(token: string, evaluationId: string): Promise<Evaluation> {
-    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
-    headers.append('Content-Type', 'application/ld+json');
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.baseURL + 'evaluations/' + evaluationId, options)
-      .toPromise()
-      .then(response => response.json() as Evaluation)
-      .catch(this.handleError);//handle exceptions
-  }
+ 
 
   getOrganisations(token: string): Promise<Organisation[]> {
     let headers = new Headers({ 'Authorization': 'Bearer ' + token });

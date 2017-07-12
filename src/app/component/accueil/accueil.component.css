@@ -23,7 +23,7 @@
 }
 
 .accueil_text_background{
-    background: url('../../assets/seprate.png');
+    background: url('../../../assets/seprate.png');
     background-position: 345px 55px;
     background-repeat: no-repeat;
 }

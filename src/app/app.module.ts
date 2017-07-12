@@ -12,10 +12,10 @@ import { InMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { ScrollbarDirective } from './scrollbar.directive';
 // import component
 import { AppComponent } from './app.component';
-import { LogoComponent } from './logo/logo.component';
-import { FooterComponent } from './footer/footer.component';
-import { AccueilComponent } from './accueil/accueil.component';
-import { MetierComponent } from './metier/metier.component';
+import { LogoComponent } from './component/logo/logo.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { AccueilComponent } from './component/accueil/accueil.component';
+import { MetierComponent } from './component/metier/metier.component';
 
 //import services
 import { AccueilService } from './service/accueil.service';

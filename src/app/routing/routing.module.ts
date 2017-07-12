@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 
-import {AccueilComponent} from '../accueil/accueil.component'
-import {MetierComponent} from '../metier/metier.component'
+import {AccueilComponent} from '../component/accueil/accueil.component'
+import {MetierComponent} from '../component/metier/metier.component'
 
 
 const routes: Routes = [
