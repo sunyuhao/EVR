@@ -3,12 +3,13 @@ import { Headers, Http, RequestOptions } from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/do';
-import { Observable }     from 'rxjs/Observable';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 import { Evaluation } from '../class/evaluation';
 import { CheckLogin } from '../class/check-login';
 import { Organisation } from '../class/organisation'
+import { SituationTravail } from '../class/situation-travail'
 
 @Injectable()
 export class MetierService {
@@ -25,7 +26,39 @@ export class MetierService {
   //header
 
 
- 
+  getLoginToken(login: string, pass: string) {
+    let body = new FormData();
+    body.append('_username', login);
+    body.append('_password', pass);
+    return this.http
+      .post(this.baseURL + 'login_check', body)
+      .toPromise()
+      .then(res => res.json())
+      .catch(this.handleError);
+  }
+
+  getListSTByGroup(token: string, organizationId): Promise<SituationTravail[]> {
+    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+    headers.append('Content-Type', 'application/ld+json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.baseURL + 'classe_situation_travails?myRepository=' + organizationId + '&order[code]=asc', options)
+      .toPromise()
+      .then(response => response.json()["hydra:member"] as SituationTravail[])
+      .catch(this.handleError);//handle exceptions
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   getOrganisations(token: string): Promise<Organisation[]> {
     let headers = new Headers({ 'Authorization': 'Bearer ' + token });
@@ -74,11 +107,11 @@ export class MetierService {
 
   }
 
-//  search(term: string): Observable<Hero[]> {
-//     return this.http
-//                .get(this.baseURL+'?name=${term}')
-//                .map(response => response.json().data as Hero[]);
-//   }
+  //  search(term: string): Observable<Hero[]> {
+  //     return this.http
+  //                .get(this.baseURL+'?name=${term}')
+  //                .map(response => response.json().data as Hero[]);
+  //   }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

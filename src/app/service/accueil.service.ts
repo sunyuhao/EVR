@@ -78,23 +78,23 @@ export class AccueilService {
       .catch(this.handleError);//handle exceptions
   }
 
-  createEvaluationByExist(token: string,name,organizationId,evaluationId):Promise<Evaluation>{
-     let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+  createEvaluationByExist(token: string, name, organizationId, evaluationId): Promise<Evaluation> {
+    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
     headers.append('Content-Type', 'application/ld+json');
     let options = new RequestOptions({ headers: headers });
-      let data = {
+    let data = {
       "name": name,
       "organizationId": organizationId,
       "evaluationSourceId": evaluationId
     }
-     let body = JSON.stringify(data);
-      return this.http.post(this.baseURL + 'evaluations/duplicate', body, options)
+    let body = JSON.stringify(data);
+    return this.http.post(this.baseURL + 'evaluations/duplicate', body, options)
       .toPromise()
       .then(response => response.json().data as Evaluation)
       .catch(this.handleError);//handle exceptions
   }
 
-  createEvaluation(token: string, name, mode, organizationId) :Promise<Evaluation>{
+  createEvaluation(token: string, name, mode, organizationId): Promise<Evaluation> {
     let headers = new Headers({ 'Authorization': 'Bearer ' + token });
     headers.append('Content-Type', 'application/ld+json');
     let options = new RequestOptions({ headers: headers });

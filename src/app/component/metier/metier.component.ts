@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { MetierService } from '../../service/metier.service';
+import { SituationTravail } from '../../class/situation-travail'
 
 declare var jquery: any;
 declare var $: any;
@@ -10,11 +11,22 @@ declare var $: any;
   styleUrls: ['./metier.component.css']
 })
 export class MetierComponent implements OnInit {
-  title = "TAM TAM"
-  constructor(private router: Router) { }
+  title = "TAM TAM";
+  login = 'wunderadmin';
+  pass = 'jgtRFkp35Pt';
+  organizationId = 458543;
+  fileId = "-1";
+  mode = "STD"
+  orgId = "-1"
+  token: string;
+  situationTravails: SituationTravail[];
+
+
+  constructor(private router: Router, private metierService: MetierService) { }
 
   ngOnInit() {
-
+    this.getLoginToken(this.login, this.pass);
+    /* ---------------------- JQuery ----------------------*/
     $('.working-situation-menu').mouseenter(function () {
       $(this).children('.expand').addClass('turn');
     });
@@ -62,6 +74,23 @@ export class MetierComponent implements OnInit {
       mouseWheel: { scrollAmount: 80 },
       theme: 'dark-3'
     });
+    /*---------------------- End JQuery ----------------------*/
+  }//end ngOnInit
+
+
+  getListSTByGroup() {
+    this.metierService.getListSTByGroup(this.token, this.organizationId).then(response => {
+      this.situationTravails = response
+    });
+  }
+
+
+  getLoginToken(login, pass): void {
+    this.metierService.getLoginToken(login, pass)
+      .then(response => {
+        this.token = response.token;
+        this.getListSTByGroup();
+      });
   }
 
   gotoAccueil(): void {

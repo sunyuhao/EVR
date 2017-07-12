@@ -97,51 +97,19 @@
           </p>
         </div>
         <div class='working-situation-block'>
-          <div>
-            <div class='working-situation-menu'>PRéPARATION ET ORGANISATION DES TRAVAUX
+          <div *ngFor="let situationTravail of situationTravails">
+            <div class='working-situation-menu'>{{situationTravail.name}}
               <div class='expand'></div>
             </div>
             <div class='sub-menu mCustomScrollbar'>
               <ul>
                 <li>
                   <input id="checkAll1" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkAll">
-                  <label for="checkAll1"> <i>Check All</i></label>
+                  <label for="checkAll1"> <i>Tous Selectionez</i></label>
                 </li>
                 <li>
                   <input id="test1" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkSituation">
                   <label for="test1">Church of the Nativity</label>
-                </li>
-                <li>
-                  <input id="test2" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkSituation">
-                  <label for="test2">Lighthouse of Utica</label>
-                </li>
-                <li>
-                  <input id="test3" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkSituation">
-                  <label for="test3">Church of the Nativity</label>
-                </li>
-                <li>
-                  <input id="test4" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkSituation">
-                  <label for="test4">Lighthouse of Utica</label>
-                </li>
-                <li>
-                  <input id="test5" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkSituation">
-                  <label for="test5">Church of the Nativity</label>
-                </li>
-                <li>
-                  <input id="test6" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkSituation">
-                  <label for="test6">Lighthouse of Utica</label>
-                </li>
-                <li>
-                  <input id="test7" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file">
-                  <label for="test7">Church of the Nativity</label>
-                </li>
-                <li>
-                  <input id="test8" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file">
-                  <label for="test8">Lighthouse of Utica</label>
-                </li>
-                <li>
-                  <input id="test9" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file">
-                  <label for="test9">Church of the Nativity</label>
                 </li>
               </ul>
             </div>
@@ -156,7 +124,7 @@
               <ul>
                 <li>
                   <input id="checkAll2" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="checkAll">
-                  <label for="checkAll2"> <i>Check All</i></label>
+                  <label for="checkAll2"> <i>Tous Selectionez</i></label>
                 </li>
 
               </ul>
@@ -166,8 +134,7 @@
         </div>
         <div class="create_metier_popin_text">
           <p>
-            Vous rencontrez une situation de travail qui ne se trouve pas dans la liste ? <br> Vous pourrez l'ajouter à l'étape
-            2.
+            Vous rencontrez une situation de travail qui ne se trouve pas dans la liste ? <br> Vous pourrez l'ajouter à l'étape 2.
           </p>
         </div>
         <div class="" style="text-align:center;">

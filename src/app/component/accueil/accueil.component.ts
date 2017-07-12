@@ -50,6 +50,7 @@ export class AccueilComponent implements OnInit {
       });
   }
 
+  //get Evaluations By Organization
   getEvaluations(orgId): void {
     this.accueilService.getEvaluations(this.token, orgId)
       .then(response => {
