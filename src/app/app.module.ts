@@ -20,7 +20,7 @@ import { MetierComponent } from './component/metier/metier.component';
 //import services
 import { AccueilService } from './service/accueil.service';
 import { MetierService } from './service/metier.service';
-import { InMemoryDataService }  from './service/in-memory-data.service';
+
 
 
 
@@ -33,18 +33,16 @@ import { InMemoryDataService }  from './service/in-memory-data.service';
     FooterComponent,
     AccueilComponent,
     MetierComponent,
-    ScrollbarDirective,
-    
+    ScrollbarDirective
   ],
   imports: [
     RoutingModule,
     BrowserModule,
-    InMemoryWebApiModule.forRoot(InMemoryDataService),
     HttpModule,
     JsonpModule,
     FormsModule
   ],
-  providers: [AccueilService,MetierService,InMemoryDataService],
+  providers: [AccueilService,MetierService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

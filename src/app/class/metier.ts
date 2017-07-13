@@ -1,6 +1,12 @@
 export class Metier {
             "@id": string;
             "@type": string;
-            id: number;
-            organizationId: string;
+            name: string;
+            remoteId: number;
+            metier: {
+                "@id": string,
+                "@type": string,
+                "id": number,
+                "name": string
+            }
 }

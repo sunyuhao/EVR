@@ -1,31 +1,68 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
+
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/operator/switchMap';
+// Observable class extensions
+import 'rxjs/add/observable/of';
+
+// Observable operators
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+
 import { MetierService } from '../../service/metier.service';
 import { SituationTravail } from '../../class/situation-travail'
-
+import { Metier } from '../../class/metier';
 declare var jquery: any;
 declare var $: any;
 @Component({
   selector: 'app-metier',
   templateUrl: './metier.component.html',
-  styleUrls: ['./metier.component.css']
+  styleUrls: ['./metier.component.css'],
+  providers: [MetierService]
 })
-export class MetierComponent implements OnInit {
+export class MetierComponent implements OnInit, AfterViewInit {
   title = "TAM TAM";
   login = 'wunderadmin';
   pass = 'jgtRFkp35Pt';
   organizationId = 458543;
   fileId = "-1";
   mode = "STD"
-  orgId = "-1"
+  orgId:string = "-1"
+  evaluationId=13;
   token: string;
   situationTravails: SituationTravail[];
 
-
+  electedMetiers: Metier[];
+  metiers: Observable<Metier[]>;
+  private searchTerms = new Subject<string>();
   constructor(private router: Router, private metierService: MetierService) { }
-
-  ngOnInit() {
+  search(term: string): void {
+   
+    this.searchTerms.next(term);
+  }
+  ngOnInit(): void {
     this.getLoginToken(this.login, this.pass);
+
+    this.metiers = this.searchTerms
+      .debounceTime(100)        // wait 300ms after each keystroke before considering the term
+      .distinctUntilChanged()   // ignore if next search term is same as previous
+      .switchMap(term => term   // switch to new observable each time the term changes
+        // return the http search observable
+        ? this.metierService.search(term,this.token) 
+        // or the observable of empty metier if there was no search term
+        : Observable.of<Metier[]>([]))
+      .catch(error => {
+        // TODO: add real error handling
+        console.log(error);
+        return Observable.of<Metier[]>([]);
+      });
+  }//end ngOnInit
+
+
+  ngAfterViewInit() {
     /* ---------------------- JQuery ----------------------*/
     $('.working-situation-menu').mouseenter(function () {
       $(this).children('.expand').addClass('turn');
@@ -69,19 +106,12 @@ export class MetierComponent implements OnInit {
       }
     });
 
-    $(".sub-menu").mCustomScrollbar({
-      scrollInertia: 400,
-      mouseWheel: { scrollAmount: 80 },
-      theme: 'dark-3'
-    });
+    // $(".sub-menu").mCustomScrollbar({
+    //   scrollInertia: 400,
+    //   mouseWheel: { scrollAmount: 80 },
+    //   theme: 'dark-3'
+    // });
     /*---------------------- End JQuery ----------------------*/
-  }//end ngOnInit
-
-
-  getListSTByGroup() {
-    this.metierService.getListSTByGroup(this.token, this.organizationId).then(response => {
-      this.situationTravails = response
-    });
   }
 
 
@@ -92,6 +122,21 @@ export class MetierComponent implements OnInit {
         this.getListSTByGroup();
       });
   }
+
+  getListSTByGroup() {
+    this.metierService.getListSTByGroup(this.token, this.organizationId).then(response => {
+      this.situationTravails = response
+    });
+  }
+
+  addMetier(metier){
+
+    this.metierService.addMetier(this.token, this.evaluationId,metier).then(response => {
+        this.electedMetiers = response;
+  });
+     
+}
+
 
   gotoAccueil(): void {
     this.router.navigate(['/accueil']);

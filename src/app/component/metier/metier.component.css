@@ -64,12 +64,44 @@
 }
 
 .metier_search_box{
-    text-align: center;
+  width: 340px;
+    text-align: left;
 }
 .metier_search_box input{
     width: 340px;
     height: 38px;
     padding-left: 5px;
+    font-weight: bold;
+}
+
+.search-result-border :last-child{
+  border-bottom: 1px solid grey;
+}
+
+.search-result{
+  animation: MyAnimation 1s;
+  border-left: 1px solid grey;
+  border-right: 1px solid grey;
+  width: 340px;
+  height: 32px;
+  padding:5px;
+  font-weight: bold;
+  font-size: 16px;
+  background-color: white;
+  cursor: pointer;
+}
+@keyframes MyAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  } 
+}
+
+.search-result:hover {
+  color: #eee;
+  background-color: #3eb98f;
 }
 
 .metier_search_result{
@@ -214,6 +246,15 @@
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
 }
+
+
+
+
+
+
+
+
+
 
 
 

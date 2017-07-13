@@ -10,6 +10,7 @@ import { Evaluation } from '../class/evaluation';
 import { CheckLogin } from '../class/check-login';
 import { Organisation } from '../class/organisation'
 import { SituationTravail } from '../class/situation-travail'
+import { Metier } from '../class/metier'
 
 @Injectable()
 export class MetierService {
@@ -47,11 +48,28 @@ export class MetierService {
       .catch(this.handleError);//handle exceptions
   }
 
+  search(term: string, token): Observable<Metier[]> {
+    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+    headers.append('Content-Type', 'application/ld+json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+      .get(this.baseURL + 'metier_synonymes?search=' + term, options)
+      .map(response => response.json()["hydra:member"] as Metier[]);
+  }
 
 
 
-
-
+  addMetier(token, evaluationId, metierId){
+    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+    headers.append('Content-Type', 'application/ld+json');
+    let options = new RequestOptions({ headers: headers });
+    let data = {}
+    let body = JSON.stringify(data);
+    return this.http.put(this.baseURL + 'evaluations/' + evaluationId + '/metiers/' + metierId, body, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);//handle exceptions
+  }
 
 
 
@@ -107,11 +125,7 @@ export class MetierService {
 
   }
 
-  //  search(term: string): Observable<Hero[]> {
-  //     return this.http
-  //                .get(this.baseURL+'?name=${term}')
-  //                .map(response => response.json().data as Hero[]);
-  //   }
+
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only
