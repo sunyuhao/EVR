@@ -248,7 +248,10 @@
 }
 
 
-
+.header_fileName{
+  font-size: 20px;
+  text-transform: uppercase;
+}
 
 
 

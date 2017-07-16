@@ -14,7 +14,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 
 import { MetierService } from '../../service/metier.service';
 import { SituationTravail } from '../../class/situation-travail'
-import { Metier } from '../../class/metier';
+import { CurrentMetier } from '../../class/current-metier';
+import { SearchMetier } from '../../class/search-metier';
 declare var jquery: any;
 declare var $: any;
 @Component({
@@ -30,35 +31,26 @@ export class MetierComponent implements OnInit, AfterViewInit {
   organizationId = 458543;
   fileId = "-1";
   mode = "STD"
-  orgId:string = "-1"
-  evaluationId=13;
-  token: string;
+  orgId: string = "-1"
+  evaluationId = JSON.parse(localStorage.getItem('evaluationLS')).evaluationId;
+  token= JSON.parse(localStorage.getItem('token')).token;
+  fileName = JSON.parse(localStorage.getItem('evaluationLS')).fileName;
   situationTravails: SituationTravail[];
+  currentMetiers: CurrentMetier[];
 
-  electedMetiers: Metier[];
-  metiers: Observable<Metier[]>;
+  s: SearchMetier[];
+  searchMetiers: Observable<SearchMetier[]>;
   private searchTerms = new Subject<string>();
   constructor(private router: Router, private metierService: MetierService) { }
+
   search(term: string): void {
-   
     this.searchTerms.next(term);
   }
-  ngOnInit(): void {
-    this.getLoginToken(this.login, this.pass);
 
-    this.metiers = this.searchTerms
-      .debounceTime(100)        // wait 300ms after each keystroke before considering the term
-      .distinctUntilChanged()   // ignore if next search term is same as previous
-      .switchMap(term => term   // switch to new observable each time the term changes
-        // return the http search observable
-        ? this.metierService.search(term,this.token) 
-        // or the observable of empty metier if there was no search term
-        : Observable.of<Metier[]>([]))
-      .catch(error => {
-        // TODO: add real error handling
-        console.log(error);
-        return Observable.of<Metier[]>([]);
-      });
+  ngOnInit(): void {
+    this.getListSTByGroup();
+    this.getCurrentMetier();
+    this.searchCore();
   }//end ngOnInit
 
 
@@ -115,28 +107,73 @@ export class MetierComponent implements OnInit, AfterViewInit {
   }
 
 
-  getLoginToken(login, pass): void {
-    this.metierService.getLoginToken(login, pass)
-      .then(response => {
-        this.token = response.token;
-        this.getListSTByGroup();
-      });
-  }
-
   getListSTByGroup() {
     this.metierService.getListSTByGroup(this.token, this.organizationId).then(response => {
       this.situationTravails = response
     });
   }
 
-  addMetier(metier){
+  getCurrentMetier() {
+    this.metierService.getCurrentMetier(this.token, this.evaluationId).then(response => {
+      this.currentMetiers = [];
+      response.forEach(element => {
+        this.currentMetiers.push(element);
+      });
+    });
+  }
 
-    this.metierService.addMetier(this.token, this.evaluationId,metier).then(response => {
-        this.electedMetiers = response;
-  });
-     
-}
+  addMetier(metierId) {
+    if(this.currentMetiers.length<6){
+        this.metierService.addMetier(this.token, this.evaluationId, metierId).then(response => {
+        this.s = response;
+        this.getCurrentMetier();
+        this.searchCore();
+      });
+    }else{
+       this.searchCore();
+    }
+   
+  }
 
+  deleteMetier(metierId) {
+    this.metierService.deleteMetier(this.token, this.evaluationId, metierId).then(response => {
+      this.s = response;
+      this.getCurrentMetier();
+    });
+
+  }
+
+  searchCore() {
+    this.searchMetiers = this.searchTerms
+      .debounceTime(100)        // wait 300ms after each keystroke before considering the term
+      .distinctUntilChanged()   // ignore if next search term is same as previous
+      .switchMap(term => term   // switch to new observable each time the term changes
+        // return the http search observable
+        ? this.metierService.search(term, this.token)
+        // or the observable of empty metier if there was no search term
+        : Observable.of<SearchMetier[]>([]))
+      .catch(error => {
+        // TODO: add real error handling
+        console.log(error);
+        return Observable.of<SearchMetier[]>([]);
+      });
+  }
+
+
+//   toggleClass(e){
+//   if(e.checked){
+//     console.log("This is checked")
+//   } else {
+//     console.log("unchecked");
+//   }
+// }
+
+// allChecked(){
+//     var searchIDs = $("input:checkbox:checked").map(function(){
+//       return $(this).val();
+//     }).get();
+//     console.log(searchIDs);
+// }
 
   gotoAccueil(): void {
     this.router.navigate(['/accueil']);

@@ -28,25 +28,28 @@ export class AccueilComponent implements OnInit {
   allEvaluations: Evaluation[];
   oneEvaluation: Evaluation;
   organisations: Organisation[];
-  token: string;
+
   evaluationName: string;
   checkLogin: CheckLogin;
+
+  /* test value pls delete it in Prod */
+  token = JSON.parse(localStorage.getItem('token')).token;
+
 
   constructor(private router: Router,
     private accueilService: AccueilService) { }
 
   ngOnInit(): void {
-    localStorage.setItem('currentUser', JSON.stringify({ token: "token", name: "name" }));
-    this.getLoginToken(this.login, this.pass);
+    localStorage.removeItem('evaluationLS');
+    this.getAllEvaluations(this.token);
+    this.getOrganisations(this.token);
   }
 
-
-  getLoginToken(login, pass): void {
-    this.accueilService.getLoginToken(login, pass)
+  getToken(): void {
+    this.accueilService.getLoginToken(this.login, this.pass)
       .then(response => {
         this.token = response.token;
-        this.getAllEvaluations(this.token);
-        this.getOrganisations(this.token);
+        localStorage.setItem('token', JSON.stringify({ token: this.token }));
       });
   }
 
@@ -75,21 +78,26 @@ export class AccueilComponent implements OnInit {
     this.accueilService.createEvaluation(this.token, evaluationName, this.mode, this.organizationId)
       .then(response => {
         this.oneEvaluation = response;
-        this.router.navigate(['/metier']);
-      });
-  }
-  continueEvaluation(evaluationId): void {
-    this.accueilService.getOneEvaluation(this.token, evaluationId)
-      .then(response => {
-        this.oneEvaluation = response; 
+        console.log(response);
+        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name,evaluationId:this.oneEvaluation.id}));
         this.router.navigate(['/metier']);
       });
   }
 
-  createEvaluationByExist(name,organizationId,evaluationId): void {
-    this.accueilService.createEvaluationByExist(this.token,name,+organizationId,+evaluationId)
+  createEvaluationByExist(name, organizationId, evaluationId): void {
+    this.accueilService.createEvaluationByExist(this.token, name, +organizationId, +evaluationId)
       .then(response => {
         this.oneEvaluation = response;
+        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name,evaluationId:this.oneEvaluation.id}));
+        this.router.navigate(['/metier']);
+      });
+  }
+
+  continueEvaluation(evaluationId): void {
+    this.accueilService.getOneEvaluation(this.token, evaluationId)
+      .then(response => {
+        this.oneEvaluation = response;
+        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name,evaluationId:this.oneEvaluation.id}));
         this.router.navigate(['/metier']);
       });
   }

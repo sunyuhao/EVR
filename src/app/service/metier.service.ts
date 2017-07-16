@@ -8,9 +8,10 @@ import 'rxjs/add/operator/map';
 
 import { Evaluation } from '../class/evaluation';
 import { CheckLogin } from '../class/check-login';
-import { Organisation } from '../class/organisation'
-import { SituationTravail } from '../class/situation-travail'
-import { Metier } from '../class/metier'
+import { Organisation } from '../class/organisation';
+import { SituationTravail } from '../class/situation-travail';
+import { SearchMetier } from '../class/search-metier';
+import { CurrentMetier } from '../class/current-metier';
 
 @Injectable()
 export class MetierService {
@@ -48,18 +49,26 @@ export class MetierService {
       .catch(this.handleError);//handle exceptions
   }
 
-  search(term: string, token): Observable<Metier[]> {
+  search(term: string, token): Observable<SearchMetier[]> {
     let headers = new Headers({ 'Authorization': 'Bearer ' + token });
     headers.append('Content-Type', 'application/ld+json');
     let options = new RequestOptions({ headers: headers });
     return this.http
       .get(this.baseURL + 'metier_synonymes?search=' + term, options)
-      .map(response => response.json()["hydra:member"] as Metier[]);
+      .map(response => response.json()["hydra:member"] as SearchMetier[]);
   }
 
+  getCurrentMetier(token, evaluationId): Promise<CurrentMetier[]> {
+    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+    headers.append('Content-Type', 'application/ld+json');
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.baseURL + 'evaluations/' + evaluationId + '/metiers', options)
+      .toPromise()
+      .then(response => response.json()["hydra:member"] as CurrentMetier[])
+      .catch(this.handleError);//handle exceptions
+  }
 
-
-  addMetier(token, evaluationId, metierId){
+  addMetier(token, evaluationId, metierId) {
     let headers = new Headers({ 'Authorization': 'Bearer ' + token });
     headers.append('Content-Type', 'application/ld+json');
     let options = new RequestOptions({ headers: headers });
@@ -71,7 +80,16 @@ export class MetierService {
       .catch(this.handleError);//handle exceptions
   }
 
+  deleteMetier(token, evaluationId, metierId) {
+    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
+    headers.append('Content-Type', 'application/ld+json');
+    let options = new RequestOptions({ headers: headers });
 
+    return this.http.delete(this.baseURL + 'evaluations/' + evaluationId + '/metiers/' + metierId, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(this.handleError);//handle exceptions
+  }
 
 
 

@@ -90,7 +90,7 @@ export class AccueilService {
     let body = JSON.stringify(data);
     return this.http.post(this.baseURL + 'evaluations/duplicate', body, options)
       .toPromise()
-      .then(response => response.json().data as Evaluation)
+      .then(response => response.json() as Evaluation)
       .catch(this.handleError);//handle exceptions
   }
 
@@ -106,7 +106,7 @@ export class AccueilService {
     let body = JSON.stringify(data);
     return this.http.post(this.baseURL + 'evaluations', body, options)
       .toPromise()
-      .then(response => response.json().data as Evaluation)
+      .then(response => response.json() as Evaluation)
       .catch(this.handleError);//handle exceptions
   }
 
