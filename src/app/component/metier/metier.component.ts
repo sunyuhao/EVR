@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -33,21 +33,22 @@ export class MetierComponent implements OnInit, AfterViewInit {
   mode = "STD"
   orgId: string = "-1"
   evaluationId = JSON.parse(localStorage.getItem('evaluationLS')).evaluationId;
-  token= JSON.parse(localStorage.getItem('token')).token;
+  token = JSON.parse(localStorage.getItem('token')).token;
   fileName = JSON.parse(localStorage.getItem('evaluationLS')).fileName;
-  situationTravails: SituationTravail[];
+  situationTravailGroups: SituationTravail[];
   currentMetiers: CurrentMetier[];
 
   s: SearchMetier[];
   searchMetiers: Observable<SearchMetier[]>;
   private searchTerms = new Subject<string>();
-  constructor(private router: Router, private metierService: MetierService) { }
+  constructor(private router: Router, private metierService: MetierService, private el: ElementRef) { }
 
   search(term: string): void {
     this.searchTerms.next(term);
   }
 
   ngOnInit(): void {
+
     this.getListSTByGroup();
     this.getCurrentMetier();
     this.searchCore();
@@ -56,17 +57,16 @@ export class MetierComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit() {
     /* ---------------------- JQuery ----------------------*/
-    $('.working-situation-menu').mouseenter(function () {
-      $(this).children('.expand').addClass('turn');
-    });
+    // $('.working-situation-menu').mouseenter(function () {
+    //   $(this).children('.expand').addClass('turn');
+    // });
 
-    $('.working-situation-menu').mouseleave(function () {
-      if ($(this).hasClass('open')) {
-      } else {
-        $(this).children('.expand').removeClass('turn');
-      }
-    });
-
+    // $('.working-situation-menu').mouseleave(function () {
+    //   if ($(this).hasClass('open')) {
+    //   } else {
+    //     $(this).children('.expand').removeClass('turn');
+    //   }
+    // });
     $('.working-situation-menu').click(function () {
       var $this = $(this);
       if ($this.hasClass('open')) {
@@ -109,7 +109,7 @@ export class MetierComponent implements OnInit, AfterViewInit {
 
   getListSTByGroup() {
     this.metierService.getListSTByGroup(this.token, this.organizationId).then(response => {
-      this.situationTravails = response
+      this.situationTravailGroups = response
     });
   }
 
@@ -123,16 +123,16 @@ export class MetierComponent implements OnInit, AfterViewInit {
   }
 
   addMetier(metierId) {
-    if(this.currentMetiers.length<6){
-        this.metierService.addMetier(this.token, this.evaluationId, metierId).then(response => {
+    if (this.currentMetiers.length < 6) {
+      this.metierService.addMetier(this.token, this.evaluationId, metierId).then(response => {
         this.s = response;
         this.getCurrentMetier();
         this.searchCore();
       });
-    }else{
-       this.searchCore();
+    } else {
+      this.searchCore();
     }
-   
+
   }
 
   deleteMetier(metierId) {
@@ -159,24 +159,46 @@ export class MetierComponent implements OnInit, AfterViewInit {
       });
   }
 
-
-//   toggleClass(e){
-//   if(e.checked){
-//     console.log("This is checked")
-//   } else {
-//     console.log("unchecked");
-//   }
-// }
-
-// allChecked(){
-//     var searchIDs = $("input:checkbox:checked").map(function(){
-//       return $(this).val();
-//     }).get();
-//     console.log(searchIDs);
-// }
+  allChecked() {
+    var searchIDs = $(" input:checkbox.checkSituation:checked").map(function () {
+      return $(this).val();
+    }).get();
+    console.log(searchIDs);
+  }
 
   gotoAccueil(): void {
     this.router.navigate(['/accueil']);
   }
 
+  getDataForTable() {
+    var $this = $(event.target);
+    if ($this.hasClass('open')) {
+      // $(".working-situation-menu").addClass("open")
+      $this.removeClass('open');
+
+      // $(".sub-menu").stop(true).slideDown("fast");
+      $this.next(".sub-menu").stop(true).slideUp("fast");
+    }
+    else {
+      // $(".working-situation-menu").removeClass("open")
+      $this.addClass('open');
+
+      // $(".sub-menu").stop(true).slideUp("fast");
+      $this.next(".sub-menu").stop(true).slideDown("fast");
+    }
+  }
+
+
+  checkAll() {
+    var $this = $(event.target);
+    var test = $this.prop('checked');
+    if (test == true) {
+      $this.prop('checked', false);
+      $this.closest("div").find("input:checkbox").prop('checked', true);
+    } else if (test == false) {
+      $this.prop('checked', true);
+      $this.closest("div").find("input:checkbox").prop('checked', false);
+    }
+
+  }
 }

@@ -79,7 +79,7 @@ export class AccueilComponent implements OnInit {
       .then(response => {
         this.oneEvaluation = response;
         console.log(response);
-        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name,evaluationId:this.oneEvaluation.id}));
+        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
         this.router.navigate(['/metier']);
       });
   }
@@ -88,7 +88,7 @@ export class AccueilComponent implements OnInit {
     this.accueilService.createEvaluationByExist(this.token, name, +organizationId, +evaluationId)
       .then(response => {
         this.oneEvaluation = response;
-        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name,evaluationId:this.oneEvaluation.id}));
+        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
         this.router.navigate(['/metier']);
       });
   }
@@ -97,7 +97,7 @@ export class AccueilComponent implements OnInit {
     this.accueilService.getOneEvaluation(this.token, evaluationId)
       .then(response => {
         this.oneEvaluation = response;
-        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name,evaluationId:this.oneEvaluation.id}));
+        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
         this.router.navigate(['/metier']);
       });
   }

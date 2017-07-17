@@ -1,9 +1,26 @@
 .row_metier_header{
     background: #019b77;
     color:white;
-    padding: 25px;
-    height: 200px;
+    padding: 25px 25px 0 25px;
+    height: 175px;
 
+}
+
+.row_metier_step_img{
+    background: #019b77;
+    color:white;
+    height: 30px;
+}
+.row_metier_step_img img{
+
+    margin: 0 28px;
+}
+
+.metier_change_name{
+  color: #bcdcd2;
+  text-decoration: underline;
+  font-size: 10px;
+  cursor: pointer;
 }
 
 .border{
@@ -12,7 +29,7 @@
 }
 
 .metier_title{
-    margin-top: 40px;
+    margin-top: 20px;
     margin-bottom: 15px;
 }
 
@@ -247,19 +264,9 @@
     font-weight: bold;
 }
 
-
 .header_fileName{
   font-size: 20px;
-  text-transform: uppercase;
 }
-
-
-
-
-
-
-
-
 
 
 /* ---------------------DROPDOWN MENU--------------------- */
