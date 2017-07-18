@@ -67,9 +67,36 @@
     font-weight: bold;
     text-transform: uppercase;
 }
+
+ .evaluation_name_error_message p{
+  text-align: left;
+  color:#D8000C;
+  font-size: 11px;
+  padding-left: 45px;
+}
+
+.select_evaluation_popin_error_message p, .select_organisation_popin_error_message p{
+  text-align: left;
+  color:#D8000C;
+  font-size: 11px;
+  padding-left: 0px;
+}
+
 .select-evaluation{
     width: 260px;
-    height: 30px;
+    height: 32px;
+}
+
+.select-evaluation-popin{
+    width: 260px;
+    height: 32px;
+}
+
+.create_evaluation_name_error_message p{
+    text-align: left;
+    color:#D8000C;
+    font-size: 11px;
+    padding-left: 145px;
 }
 
 .accueil_delete{
@@ -98,7 +125,9 @@
 }
 
 
-
+.popin_text_block{
+margin-bottom: 10px;
+}
 .popin_text_top{
     font-size: 12px;
 }

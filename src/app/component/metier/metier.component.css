@@ -214,6 +214,13 @@
     
 }
 
+.metier_name_error_message p{
+  text-align: left;
+  color:#D8000C;
+  font-size: 11px;
+  padding-left: 130px;
+}
+
 .metier_name_block{
     margin-bottom: 25px;
 }
@@ -251,7 +258,17 @@
     text-transform: uppercase;
 }
 
+.popin_change_fileName_text{
+  margin: 10px;
+  text-align: left;
+  font-weight: bold;
+    height: 40px;
+}
 
+.popin_change_fileName_input{
+  width: 300px;
+  height: 38px;
+}
 
 .create_metier_popin_text {
  margin-bottom: 5px;
@@ -349,7 +366,7 @@
 
 @keyframes turn-plus {
   0% {
-    transform: translate(0, 0);
+    transform:rotate(0deg);
   }
   50% {
     transform: rotate(0deg);
@@ -360,7 +377,6 @@
 }
 @keyframes turn-crossbar {
   0% {
-    transform: none;
     transform: rotate(90deg);
   }
   50% {

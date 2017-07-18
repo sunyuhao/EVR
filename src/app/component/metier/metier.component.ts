@@ -35,6 +35,10 @@ export class MetierComponent implements OnInit, AfterViewInit {
   evaluationId = JSON.parse(localStorage.getItem('evaluationLS')).evaluationId;
   token = JSON.parse(localStorage.getItem('token')).token;
   fileName = JSON.parse(localStorage.getItem('evaluationLS')).fileName;
+
+  metierNameToModif: string;
+  metierIdToModif: number;
+
   situationTravailGroups: SituationTravail[];
   currentMetiers: CurrentMetier[];
 
@@ -56,6 +60,7 @@ export class MetierComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
+
     /* ---------------------- JQuery ----------------------*/
     // $('.working-situation-menu').mouseenter(function () {
     //   $(this).children('.expand').addClass('turn');
@@ -123,16 +128,17 @@ export class MetierComponent implements OnInit, AfterViewInit {
   }
 
   addMetier(metierId) {
-    if (this.currentMetiers.length < 6) {
-      this.metierService.addMetier(this.token, this.evaluationId, metierId).then(response => {
-        this.s = response;
-        this.getCurrentMetier();
-        this.searchCore();
-      });
-    } else {
+    this.metierService.addMetier(this.token, this.evaluationId, metierId).then(response => {
+      this.s = response;
+      this.getCurrentMetier();
       this.searchCore();
-    }
+    });
+  }
 
+  openModifMetier(metierId, metieName) {
+    $("#popin_modif_metier").modal("show")
+    this.metierIdToModif = metierId;
+    this.metierNameToModif = metieName;
   }
 
   deleteMetier(metierId) {
@@ -163,16 +169,19 @@ export class MetierComponent implements OnInit, AfterViewInit {
     var stArray = $("input:checkbox.checkSituation:checked").map(function () {
       return $(this).val();
     }).get();
-    if(name){
+    if (name) {
       this.metierService.createCustomMetier(this.token, name, stArray, this.evaluationId).then(response => {
         this.s = response;
         this.getCurrentMetier();
         this.searchCore();
+        $("#popin_create_metier").modal('hide');
+        $(".metier_name_error_message").addClass('hide');
+        $("#metier_name").css("border", "1px solid #bababa");
       });
-    }else{
-      alert("test")
+    } else {
+      $(".metier_name_error_message").removeClass('hide');
+      $("#metier_name").css("border", "1px solid #D8000C");
     }
-
   }
 
   gotoAccueil(): void {
@@ -182,21 +191,21 @@ export class MetierComponent implements OnInit, AfterViewInit {
   dropDownList() {
     var $this = $(event.target);
     if ($this.hasClass('open')) {
-      // $(".working-situation-menu").addClass("open")
       $this.removeClass('open');
-
-      // $(".sub-menu").stop(true).slideDown("fast");
       $this.next(".sub-menu").stop(true).slideUp("fast");
     }
     else {
-      // $(".working-situation-menu").removeClass("open")
+      $(".working-situation-menu").removeClass("open")
       $this.addClass('open');
-
-      // $(".sub-menu").stop(true).slideUp("fast");
+      $(".sub-menu").stop(true).slideUp("fast");
       $this.next(".sub-menu").stop(true).slideDown("fast");
     }
   }
 
+  modifMetier(metierId) {
+    this.deleteMetier(this.metierIdToModif);
+    this.addMetier(metierId);
+  }
 
   checkAll() {
     var $this = $(event.target);
@@ -210,4 +219,16 @@ export class MetierComponent implements OnInit, AfterViewInit {
     }
 
   }
+
+  toggleClass(e) {
+    if (e.target.checked) {
+      $('.delete_metier').removeClass('hide');
+            $('.modif_metier').addClass('hide');
+    }
+    if (!e.target.checked) {
+            $('.modif_metier').removeClass('hide');
+      $('.delete_metier').addClass('hide');
+    }
+  }
+
 }

@@ -77,9 +77,12 @@
               Continuer/modifier une évaluation des risques existante
             </p>
           </div>
+          <div class="evaluation_name_error_message hide">
+            <p>Veuillez choisir une évaluation</p>
+          </div>
           <div style="text-align:center; margin-bottom:10px;">
             <select class="select-evaluation" [(ngModel)]="fileId" (ngModelChange)="getFileId()">
-              <option value="-1" disabled selected>Choisir</option>
+              <option value="-1" selected>Choisir</option>
               <option  *ngFor="let evaluation of allEvaluations"  [value]="evaluation.id"  >
                 {{evaluation.name}}
               </option>
@@ -87,7 +90,7 @@
           </div>
           <div style="text-align:center;">
             <div class="col-xs-4 accueil_delete">
-              <a href="" data-toggle="modal" data-target="#popin_delete_evaluation"> Supprimer </a>
+              <a (click)="checkEvaluation(fileId)"> Supprimer </a>
             </div>
             <div class="col-xs-4">
               <button class="accueil_button_create" (click)="continueEvaluation(fileId)">
@@ -113,7 +116,7 @@
         <h4 class="modal-title" id="myModalLabel">Création d'un nouveau dossier d'évaluation des risques</h4>
       </div>
       <div class="modal-body">
-        <div>
+        <div class="popin_text_block">
           <p class="popin_text_top">
             Vous allez créer un dossier d’évaluation des risques qui vous permettra de générer le DUER ainsi que ses annexes et de formaliser
             un plan d’action.
@@ -126,6 +129,9 @@
             type de chantiers...)
           </p>
         </div>
+        <div class="create_evaluation_name_error_message hide">
+          <p>Veuillez saisir le nom de l'évaluation.</p>
+        </div>
         <div class="file_name_block">
           <label for="file_name" class="label_for_file_name">Nom du dossier* : </label><input type="text" id="file_name"
             #MarkerEvalInput>
@@ -134,9 +140,20 @@
           <input id="check_create_by_exist" data-md-icheck (change)="toggleClass($event)" type="checkbox" name="exisit_file" class="exisit_file">
           <label for="check_create_by_exist">Créer un nouveau dossier à partir d’un dossier existant</label>
         </div>
+
         <div class="row create_by_existe hide">
           <div class="col-xs-6">
-            <select class="select-exist" [(ngModel)]="orgId" (ngModelChange)="getEvaluations(orgId)">
+            <div class="select_organisation_popin_error_message hide">
+              <p>Veuillez choisir une organization</p>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <div class="select_evaluation_popin_error_message hide">
+              <p>Veuillez choisir une évaluation</p>
+            </div>
+          </div>
+          <div class="col-xs-6">
+            <select id="select_organisation_popin" class="select-exist" [(ngModel)]="orgId" (ngModelChange)="getEvaluations(orgId)">
                 <option value="-1" selected>Choisir une entreprise</option>
                 <option  *ngFor="let organisation of organisations"  [value]="organisation.organizationId"  >
                   {{organisation.displayName}}
@@ -145,7 +162,7 @@
           </div>
           <div class="col-xs-6">
             <div style="text-align:center; margin-bottom:10px;">
-              <select class="select-evaluation" #MarkerEvalId>
+              <select id="select_evaluation_popin" class="select-evaluation-popin" #MarkerEvalId>
                 <option value="-1" disabled selected>Choisir</option>
                 <option  *ngFor="let evaluation of evaluations"  [value]="evaluation.id"  >
                   {{evaluation.name}}
@@ -155,12 +172,12 @@
           </div>
         </div>
         <div class="create_with_new" style="text-align:center;">
-          <button class="accueil_button_create" data-dismiss="modal" (click)="createEvaluation(MarkerEvalInput.value);">
+          <button class="accueil_button_create" (click)="createEvaluation(MarkerEvalInput.value);">
               Créer le dossier
           </button>
         </div>
         <div class="create_with_exist hide" style="text-align:center;">
-          <button class="accueil_button_create" data-dismiss="modal" (click)="createEvaluationByExist(MarkerEvalInput.value,orgId,MarkerEvalId.value);">
+          <button class="accueil_button_create" (click)="createEvaluationByExist(MarkerEvalInput.value,orgId,MarkerEvalId.value);">
               Créer le dossier
           </button>
         </div>

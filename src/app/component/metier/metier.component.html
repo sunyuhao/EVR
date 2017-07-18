@@ -74,7 +74,7 @@
         Vos métiers sélectionnés <span class="arrow-down"> </span>
       </div>
       <div *ngFor="let currentMetier of currentMetiers" class="metier_selected_list">
-        <img src="assets/delete_metier.png" alt="" (click)="deleteMetier(currentMetier.id)"> {{currentMetier.name}}
+        <img src="assets/delete_metier.png" alt="" (click)="openModifMetier(currentMetier.id,currentMetier.name)"> {{currentMetier.name}}
       </div>
     </div>
   </div>
@@ -90,7 +90,54 @@
   </div>
 </div>
 
-<!--Modal Create metier-->
+
+
+
+<!--Modal Modifier le metier-->
+<div class="modal fade" id="popin_modif_metier" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#ffffff;">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modifier le métier</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="file_name_block">
+          <input id="check_delete_metier" data-md-icheck (change)="toggleClass($event)" type="checkbox">
+          <label for="check_delete_metier"></label>
+          <input placeholder="ex:Peintre" #searchBox id="search-box" (keyup)="search(searchBox.value)">
+          <div class="search-result-border">
+            <div *ngFor="let searchMetier of searchMetiers | async" (click)='modifMetier(searchMetier["metier"].id); searchBox.value="";'
+              class="search-result">
+              {{searchMetier.name}}
+            </div>
+          </div>
+        </div>
+
+        <div class="delete_metier hide" style="text-align:center;">
+          <button class="" (click)="deleteMetier(metierIdToModif)">
+              delete le dossier
+          </button>
+        </div>
+        <div class="modif_metier" style="text-align:center;">
+          <button class="" (click)="modifMetier(metierIdToModif)">
+              Modifier le dossier
+          </button>
+        </div>
+        <div class="accueil_cancel" style="text-align:center;">
+          <a href="" data-dismiss="modal">Annuler</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--Modal Modifier le nom de votre dossier-->
 <div class="modal fade" id="popin_change_fileName" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -99,14 +146,19 @@
         <h4 class="modal-title" id="myModalLabel">Modifier le nom de votre dossier</h4>
       </div>
       <div class="modal-body">
-        <div>
-          {{title}}
+        <div class="popin_change_fileName_text">
+          Nom du entreprise: {{title}}
         </div>
-        <div>
-          {{fileName}}
+
+        <div class="popin_change_fileName_text">
+          Nom du dossier: {{fileName}}
+        </div>
+
+        <div class="popin_change_fileName_text">
+          <label for="">Nouveau nom du dossier:</label> <input type="text" class="popin_change_fileName_input">
         </div>
         <div class="" style="text-align:center;">
-          <button class="metier_button_create" >
+          <button class="metier_button_create">
             Validez
           </button>
         </div>
@@ -127,9 +179,12 @@
         <h4 class="modal-title" id="myModalLabel">Créez un nouveau métier</h4>
       </div>
       <div class="modal-body">
+        <div class="metier_name_error_message hide">
+          <p>Veuillez donner un nom à votre métier</p>
+        </div>
         <div class="metier_name_block">
-          <label for="metier_name" class="label_for_metier_name">Intitulé du métier* </label><input type="text" id="metier_name"
-            #metierNameInput placeholder="Donnez un nom à votre métier">
+          <label for="metier_name" class="label_for_metier_name">Intitulé du métier* </label>
+          <input type="text" id="metier_name" #metierNameInput placeholder="Donnez un nom à votre métier">
         </div>
         <div class="create_metier_popin_text">
           <p>
@@ -150,7 +205,7 @@
                   <label for="checkAll{{i}}"> <i>Tou Selectionner</i></label>
                 </li>
                 <li *ngFor="let ST of STGroup.situationTravails">
-                  <input id="st{{ST.id}}" data-md-icheck type="checkbox" class="checkSituation" value= '{{ST["@id"]}}'>
+                  <input id="st{{ST.id}}" data-md-icheck type="checkbox" class="checkSituation" value='{{ST["@id"]}}'>
                   <label for="st{{ST.id}}">{{ST.name}}</label>
                 </li>
               </ul>
@@ -160,11 +215,12 @@
         </div>
         <div class="create_metier_popin_text">
           <p>
-            Vous rencontrez une situation de travail qui ne se trouve pas dans la liste ? <br> Vous pourrez l'ajouter à l'étape 2.
+            Vous rencontrez une situation de travail qui ne se trouve pas dans la liste ?
+            <br> Vous pourrez l'ajouter à l'étape 2.
           </p>
         </div>
         <div class="" style="text-align:center;">
-          <button data-dismiss="modal" class="metier_button_create" (click)='createCustomMetier(metierNameInput.value);metierNameInput.value=""'>
+          <button class="metier_button_create" (click)='createCustomMetier(metierNameInput.value)'>
             Validez
           </button>
         </div>

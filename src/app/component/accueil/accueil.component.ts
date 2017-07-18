@@ -32,10 +32,8 @@ export class AccueilComponent implements OnInit {
   evaluationName: string;
   checkLogin: CheckLogin;
 
-  /* test value pls delete it in Prod */
+
   token = JSON.parse(localStorage.getItem('token')).token;
-
-
   constructor(private router: Router,
     private accueilService: AccueilService) { }
 
@@ -75,31 +73,79 @@ export class AccueilComponent implements OnInit {
   }
 
   createEvaluation(evaluationName): void {
-    this.accueilService.createEvaluation(this.token, evaluationName, this.mode, this.organizationId)
-      .then(response => {
-        this.oneEvaluation = response;
-        console.log(response);
-        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
-        this.router.navigate(['/metier']);
-      });
+    if (evaluationName) {
+      $(".create_evaluation_name_error_message").addClass('hide');
+      $("#file_name").css("border", "1px solid #bababa");
+      this.accueilService.createEvaluation(this.token, evaluationName, this.mode, this.organizationId)
+        .then(response => {
+          this.oneEvaluation = response;
+          console.log(response);
+          localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
+          $("#popin_create_evaluation").modal('hide');
+          this.router.navigate(['/metier']);
+        });
+    } else {
+      $(".create_evaluation_name_error_message").removeClass('hide');
+      $("#file_name").css("border", "1px solid #D8000C");
+    }
   }
 
   createEvaluationByExist(name, organizationId, evaluationId): void {
-    this.accueilService.createEvaluationByExist(this.token, name, +organizationId, +evaluationId)
-      .then(response => {
-        this.oneEvaluation = response;
-        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
-        this.router.navigate(['/metier']);
-      });
+    var count = 0;
+    if (!name) {
+      $(".create_evaluation_name_error_message").removeClass('hide');
+      $("#file_name").css("border", "1px solid #D8000C");
+      count += 1;
+    } else {
+      $(".create_evaluation_name_error_message").addClass('hide');
+      $("#file_name").css("border", "1px solid #bababa");
+    }
+
+    if (organizationId == -1) {
+      $(".select_organisation_popin_error_message").removeClass('hide');
+      $("#select_organisation_popin").css("border", "1px solid #D8000C");
+      count += 1;
+    } else {
+      $(".select_organisation_popin_error_message").addClass('hide');
+      $("#select_organisation_popin").css("border", "1px solid #bababa");
+    }
+
+    if (evaluationId == -1) {
+      $(".select_evaluation_popin_error_message").removeClass('hide');
+      $("#select_evaluation_popin").css("border", "1px solid #D8000C");
+      count += 1;
+    } else {
+      $(".select_evaluation_popin_error_message").addClass('hide');
+      $("#select_evaluation_popin").css("border", "1px solid #bababa");
+    }
+    if (count == 0) {
+      this.accueilService.createEvaluationByExist(this.token, name, +organizationId, +evaluationId)
+        .then(response => {
+          this.oneEvaluation = response;
+          localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
+          $("#popin_create_evaluation").modal('hide');
+          this.router.navigate(['/metier']);
+        });
+    }
   }
 
   continueEvaluation(evaluationId): void {
-    this.accueilService.getOneEvaluation(this.token, evaluationId)
-      .then(response => {
-        this.oneEvaluation = response;
-        localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
-        this.router.navigate(['/metier']);
-      });
+
+    if (evaluationId == "-1") {
+      $(".evaluation_name_error_message").removeClass('hide');
+      $("select.select-evaluation").css("border", "1px solid #D8000C");
+    } else {
+      $(".evaluation_name_error_message").addClass('hide');
+      $("select.select-evaluation").css("border", "1px solid #bababa");
+      this.accueilService.getOneEvaluation(this.token, evaluationId)
+        .then(response => {
+          this.oneEvaluation = response;
+          localStorage.setItem('evaluationLS', JSON.stringify({ fileName: this.oneEvaluation.name, evaluationId: this.oneEvaluation.id }));
+          this.router.navigate(['/metier']);
+        });
+    }
+
+
   }
 
   deleteEvaluation(evaluationId) {
@@ -134,5 +180,14 @@ export class AccueilComponent implements OnInit {
       $('.create_with_new').removeClass('hide');
     }
   }
-
+  checkEvaluation(fileId) {
+    if (fileId == "-1") {
+      $(".evaluation_name_error_message").removeClass('hide');
+      $("select.select-evaluation").css("border", "1px solid #D8000C");
+    } else {
+      $(".evaluation_name_error_message").addClass('hide');
+      $("select.select-evaluation").css("border", "1px solid #bababa");
+      $("#popin_delete_evaluation").modal('show');
+    }
+  }
 }
