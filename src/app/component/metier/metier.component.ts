@@ -202,9 +202,9 @@ export class MetierComponent implements OnInit, AfterViewInit {
     }
   }
 
-  modifMetier(metierId) {
-    this.deleteMetier(this.metierIdToModif);
-    this.addMetier(metierId);
+  modifMetier(Id) {
+    this.deleteMetier(Id);
+    $("#popin_modif_metier").modal('hide');
   }
 
   checkAll() {
@@ -222,12 +222,12 @@ export class MetierComponent implements OnInit, AfterViewInit {
 
   toggleClass(e) {
     if (e.target.checked) {
-      $('.delete_metier').removeClass('hide');
-            $('.modif_metier').addClass('hide');
+      $('.metier_button_modif_active').removeClass('hide');
+      $('.metier_button_modif_inactive').addClass('hide');
     }
     if (!e.target.checked) {
-            $('.modif_metier').removeClass('hide');
-      $('.delete_metier').addClass('hide');
+      $('.metier_button_modif_inactive').removeClass('hide');
+      $('.metier_button_modif_active').addClass('hide');
     }
   }
 

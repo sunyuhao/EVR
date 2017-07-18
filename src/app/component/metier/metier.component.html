@@ -99,33 +99,28 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color:#ffffff;">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modifier le métier</h4>
+        <h4 class="modal-title" id="myModalLabel">Modifier un métier</h4>
       </div>
       <div class="modal-body">
-
-        <div class="file_name_block">
-          <input id="check_delete_metier" data-md-icheck (change)="toggleClass($event)" type="checkbox">
-          <label for="check_delete_metier"></label>
-          <input placeholder="ex:Peintre" #searchBox id="search-box" (keyup)="search(searchBox.value)">
-          <div class="search-result-border">
-            <div *ngFor="let searchMetier of searchMetiers | async" (click)='modifMetier(searchMetier["metier"].id); searchBox.value="";'
-              class="search-result">
-              {{searchMetier.name}}
-            </div>
-          </div>
+        <div class="modif_metier_text">
+          <p>Vous pouvez modifier un métier. Si vous souhaitez le supprimer définitivement, sélectionnez-le en cochant la case.</p>
+        </div>
+        <div class="modif_metier_block">
+          <input id="check_delete_metier" data-md-icheck (change)="toggleClass($event)" type="checkbox" >
+          <label for="check_delete_metier" style="height: 9px;"></label>
+          <input type="text" class="modif_metier_input" value="{{metierNameToModif}}" disabled>
         </div>
 
-        <div class="delete_metier hide" style="text-align:center;">
-          <button class="" (click)="deleteMetier(metierIdToModif)">
-              delete le dossier
+  
+        <div style="text-align:center;">
+          <button class="metier_button_modif_active hide" (click)="modifMetier(metierIdToModif)">
+              Valider
+          </button>
+          <button class="metier_button_modif_inactive" disabled >
+              Valider
           </button>
         </div>
-        <div class="modif_metier" style="text-align:center;">
-          <button class="" (click)="modifMetier(metierIdToModif)">
-              Modifier le dossier
-          </button>
-        </div>
-        <div class="accueil_cancel" style="text-align:center;">
+        <div class="metier_cancel" style="text-align:center;">
           <a href="" data-dismiss="modal">Annuler</a>
         </div>
       </div>
@@ -159,7 +154,7 @@
         </div>
         <div class="" style="text-align:center;">
           <button class="metier_button_create">
-            Validez
+            Valider
           </button>
         </div>
         <div class="metier_cancel" style="text-align:center;">

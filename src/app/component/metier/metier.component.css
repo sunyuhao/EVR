@@ -221,6 +221,29 @@
   padding-left: 130px;
 }
 
+.modif_metier_text{
+  margin-bottom: 30px;
+}
+
+.modif_metier_text p{
+  font-size: 12px;
+}
+
+.modif_metier_block{
+  text-align: center;
+}
+
+.modif_metier_input{
+  width: 365px;
+  height: 33px;
+  padding-left: 10px;
+}
+
+.modif_metier_input:disabled{
+background: #ffffff;
+border: 1px solid #aaaaaa;
+}
+
 .metier_name_block{
     margin-bottom: 25px;
 }
@@ -244,6 +267,33 @@
     color: #000000;
     font-weight: bold;
 
+}
+
+
+.metier_button_modif_active{
+    margin: 30px 0 0 0;
+    padding: 10px 60px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #019b77;
+    background-color: #ffffff;
+    color: #019b77;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.metier_button_modif_inactive{
+    margin: 30px 0 0 0;
+    padding: 10px 60px;
+    text-align: center;
+    border-radius: 5px;
+    border: 2px solid #aaaaaa;
+    background-color: #ffffff;
+    color: #aaaaaa;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
 .metier_button_create{
