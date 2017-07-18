@@ -91,47 +91,21 @@ export class MetierService {
       .catch(this.handleError);//handle exceptions
   }
 
-
-
-
-
-
-  getOrganisations(token: string): Promise<Organisation[]> {
-    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
-    headers.append('Content-Type', 'application/ld+json');
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.baseURL + 'groups', options)
-      .toPromise()
-      .then(response => response.json()["hydra:member"] as Organisation[])
-      .catch(this.handleError);//handle exceptions
-  }
-
-  createEvaluation(token: string, name, mode, organizationId) {
+  createCustomMetier(token: string, name, stArray,evaluationId) {
     let headers = new Headers({ 'Authorization': 'Bearer ' + token });
     headers.append('Content-Type', 'application/ld+json');
     let options = new RequestOptions({ headers: headers });
     let data = {
       "name": name,
-      "mode": mode,
-      "organizationId": organizationId
+      "situationsTravails":stArray
     }
     let body = JSON.stringify(data);
-    return this.http.post(this.baseURL + 'evaluations', body, options)
+    return this.http.post(this.baseURL + 'evaluations/'+evaluationId+'/metiers', body, options)
       .toPromise()
       .then(response => response.json().data)
       .catch(this.handleError);//handle exceptions
   }
 
-  deleteEvaluation(token: string, evaluationId: number) {
-    let headers = new Headers({ 'Authorization': 'Bearer ' + token });
-    headers.append('Content-Type', 'application/ld+json');
-    let options = new RequestOptions({ headers: headers });
-
-    return this.http.delete(this.baseURL + 'evaluations/' + evaluationId, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);//handle exceptions
-  }
 
   checkUser(token: string): Promise<CheckLogin> {
     let headers = new Headers({ 'Authorization': 'Bearer ' + token });

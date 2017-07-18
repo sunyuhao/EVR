@@ -20,6 +20,7 @@ import { MetierComponent } from './component/metier/metier.component';
 //import services
 import { AccueilService } from './service/accueil.service';
 import { MetierService } from './service/metier.service';
+import { LoginComponent } from './component/login/login.component';
 
 
 
@@ -33,7 +34,8 @@ import { MetierService } from './service/metier.service';
     FooterComponent,
     AccueilComponent,
     MetierComponent,
-    ScrollbarDirective
+    ScrollbarDirective,
+    LoginComponent
   ],
   imports: [
     RoutingModule,

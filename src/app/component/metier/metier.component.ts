@@ -159,18 +159,27 @@ export class MetierComponent implements OnInit, AfterViewInit {
       });
   }
 
-  allChecked() {
-    var searchIDs = $(" input:checkbox.checkSituation:checked").map(function () {
+  createCustomMetier(name) {
+    var stArray = $("input:checkbox.checkSituation:checked").map(function () {
       return $(this).val();
     }).get();
-    console.log(searchIDs);
+    if(name){
+      this.metierService.createCustomMetier(this.token, name, stArray, this.evaluationId).then(response => {
+        this.s = response;
+        this.getCurrentMetier();
+        this.searchCore();
+      });
+    }else{
+      alert("test")
+    }
+
   }
 
   gotoAccueil(): void {
     this.router.navigate(['/accueil']);
   }
 
-  getDataForTable() {
+  dropDownList() {
     var $this = $(event.target);
     if ($this.hasClass('open')) {
       // $(".working-situation-menu").addClass("open")
@@ -191,11 +200,11 @@ export class MetierComponent implements OnInit, AfterViewInit {
 
   checkAll() {
     var $this = $(event.target);
-    var test = $this.prop('checked');
-    if (test == true) {
+    var isChecked = $this.prop('checked');
+    if (isChecked == true) {
       $this.prop('checked', false);
       $this.closest("div").find("input:checkbox").prop('checked', true);
-    } else if (test == false) {
+    } else if (isChecked == false) {
       $this.prop('checked', true);
       $this.closest("div").find("input:checkbox").prop('checked', false);
     }
